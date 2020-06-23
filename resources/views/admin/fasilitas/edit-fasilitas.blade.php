@@ -38,23 +38,23 @@
                 </div>
                 <div class="form-group">
                   <label for="olahraga_siang">Tarif penggunaan untuk olahraga siang</label>
-                  <input value="{{ $facility->olahraga_siang }}" id="olahraga_siang" class="form-control" placeholder="Isi dalam bentuk rupiah" name="olahraga_siang" minlength="2" type="text" required>
+                  <input value="{{ $facility->olahraga_siang }}" id="olahraga_siang" class="form-control" name="olahraga_siang" minlength="2" type="text" required>
                 </div>
                 <div class="form-group">
                   <label for="olahraga_malam">Tarif Penggunaan untuk olahraga malam</label>
-                  <input value="{{ $facility->olahraga_malam }}" id="olahraga_malam" class="form-control" placeholder="Isi dalam bentuk rupiah" name="olahraga_malam" minlength="2" type="text" required>
+                  <input value="{{ $facility->olahraga_malam }}" id="olahraga_malam" class="form-control" name="olahraga_malam" minlength="2" type="text" required>
                 </div>
                 <div class="form-group">
                   <label for="dengan_karcis_sponsor">Tarif Penggunaan selain olahraga (Menarik Karcis dan Sponsor)</label>
-                  <input value="{{ $facility->dengan_karcis_sponsor }}" id="dengan_karcis_sponsor" class="form-control" placeholder="Isi dalam bentuk rupiah" name="dengan_karcis_sponsor" minlength="2" type="text" required>
+                  <input value="{{ $facility->dengan_karcis_sponsor }}" id="dengan_karcis_sponsor" class="form-control" name="dengan_karcis_sponsor" minlength="2" type="text" required>
                 </div>
                 <div class="form-group">
                   <label for="dengan_sponsor">Tarif Penggunaan selain olahraga (Dengan Sponsor)</label>
-                  <input value="{{ $facility->dengan_sponsor }}" id="dengan_sponsor" class="form-control" placeholder="Isi dalam bentuk rupiah" name="dengan_sponsor" minlength="2" type="text" required>
+                  <input value="{{ $facility->dengan_sponsor }}" id="dengan_sponsor" class="form-control" name="dengan_sponsor" minlength="2" type="text" required>
                 </div>
                 <div class="form-group">
                   <label for="tanpa_karcis_sponsor">Tarif Penggunaan selain olahraga (Tanpa Karcis dan Sponsor)</label>
-                  <input value="{{ $facility->tanpa_karcis_sponsor }}" id="tanpa_karcis_sponsor" class="form-control" placeholder="Isi dalam bentuk rupiah" name="tanpa_karcis_sponsor" minlength="2" type="text" required>
+                  <input value="{{ $facility->tanpa_karcis_sponsor }}" id="tanpa_karcis_sponsor" class="form-control" name="tanpa_karcis_sponsor" minlength="2" type="text" required>
                 </div>
               <input class="btn btn-primary" type="submit" value="Update">
               <a href="{{ route('admin.fasilitas') }}" class="btn btn-outline-danger">Cancel</a>  

@@ -102,10 +102,10 @@
 						data-version="5.1.4">
 						<ul>
 							<li class="dark" data-transition="fade" data-slotamount="1" data-masterspeed="1000"
-								data-thumb="{{ asset('images/slider/rev/main/s1-thumb.jpg') }}" data-saveperformance="off"
+								data-thumb="{{ asset('images/slider/rev/main/IMG20191230112448.jpg') }}" data-saveperformance="off"
 								data-title="Welcome to Canvas">
 
-								<img src="{{ asset('images/videos/explore-poster.jpg') }}" alt="" data-bgposition="center center"
+								<img src="{{ asset('images/slider/rev/main/IMG20191230112448.jpg') }}" alt="" data-bgposition="center center"
 									data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10"
 									class="rev-slidebg" data-no-retina>
 
@@ -161,7 +161,7 @@
 							</div>
 							<p>Fasilitas yang dimiliki meliputi Lapangan Outdoor, lapangan Indoor, Kolam Renang dan
 								Halaman Depan</p>
-							<a href="Fasilitas.html"
+							<a href="{{ route('pengguna.fasilitas') }}"
 								class="button button-border button-rounded button-large noleftmargin topmargin-sm">Lebih Lanjut</a>
 						</div>
 						<div class="line"></div>

@@ -40,7 +40,15 @@ Route::prefix('admin')->group(function(){
     Route::post('/artikel-tambahdata', 'Admin\ArtikelController@store')->name('admin.artikel.tambahdata');
     Route::get('/artikel/{id}/edit', 'Admin\ArtikelController@edit')->name('admin.artikel.edit');
     Route::patch('/artikel/{id}', 'Admin\ArtikelController@update')->name('admin.artikel.editdata');
-    Route::get('/artikel/{id}/delete', 'Admin\ArtikelController@destroy')->name('admin.artikel.delte');
+    Route::delete('/artikel/{id}', 'Admin\ArtikelController@destroy')->name('admin.artikel.hapus');
+
+    //Admin Acara
+    Route::get('/acara', 'Admin\EventController@index')->name('admin.acara');
+    Route::get('/acara-tambah', 'Admin\EventController@create')->name('admin.acara.tambah');
+    Route::post('/acara-tambahdata', 'Admin\EventController@store')->name('admin.acara.tambahdata');
+    Route::get('/acara/{id}/edit', 'Admin\EventController@edit')->name('admin.acara.edit');
+    Route::patch('/acara/{id}', 'Admin\EventController@update')->name('admin.acara.editdata');
+    Route::delete('/acara/{id}', 'Admin\EventController@destroy')->name('admin.acara.hapus');
 
     //Admin Fasilitas
     Route::get('/fasilitas', 'Admin\FacilityController@index')->name('admin.fasilitas');
@@ -48,12 +56,7 @@ Route::prefix('admin')->group(function(){
     Route::post('/fasilitas-tambahdata', 'Admin\FacilityController@store')->name('admin.fasilitas.tambahdata');
     Route::get('/fasilitas/{id}/edit', 'Admin\FacilityController@edit')->name('admin.fasilitas.edit');
     Route::patch('/fasilitas/{id}', 'Admin\FacilityController@update')->name('admin.fasilitas.editdata');
-
-    
-    Route::get('/acara', function () {
-        return view('admin.acara.acara');
-    })->name('admin.acara');
-    
+    Route::delete('/fasilitas/{id}', 'Admin\FacilityController@destroy')->name('admin.fasilitas.hapus');
     
 });
 
@@ -62,13 +65,9 @@ Route::prefix('pengguna')->group(function(){
         return view('pengguna.home');
     })->name('pengguna.home');
     
-    Route::get('/fasilitas', function () {
-        return view('pengguna.fasilitas');
-    })->name('pengguna.fasilitas');
+    Route::get('/fasilitas', 'Pengguna\FasilitasController@index')->name('pengguna.fasilitas');
 
-    Route::get('/detail-fasilitas', function () {
-        return view('pengguna.detail_fasilitas');
-    })->name('pengguna.detail_fasilitas');
+    Route::get('/detail-fasilitas/{id}', 'Pengguna\FasilitasController@show')->name('pengguna.detail_fasilitas');
 
     Route::get('/pemesanan-fasilitas-harian', function () {
         return view('pengguna.pemesanan_hari');
@@ -78,13 +77,9 @@ Route::prefix('pengguna')->group(function(){
         return view('pengguna.pemesanan_jam');
     })->name('pengguna.pemesanan_jam');
 
-    Route::get('/acara', function () {
-        return view('pengguna.daftar_acara');
-    })->name('pengguna.daftar_acara');
+    Route::get('/acara', 'Pengguna\EventController@index')->name('pengguna.daftar_acara');
 
-    Route::get('/artikel', function () {
-        return view('pengguna.artikel');
-    })->name('pengguna.artikel');
+    Route::get('/artikel', 'Pengguna\ArtikelController@index')->name('pengguna.artikel');
 
     Route::get('/detail-artikel', function () {
         return view('pengguna.detail_artikel');

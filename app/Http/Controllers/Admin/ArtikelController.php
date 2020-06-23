@@ -42,12 +42,11 @@ class ArtikelController extends Controller
         $destinationPath = public_path('uploads/admin/article');
         $gambar->move($destinationPath, $path);
         
-        $articles = new Article([
-            'title' => $request->input('title'),
-            'content' => $request->input('content'),
-            'gambar' => $path
-        ]);
-        $articles->save();
+        $article = new Article();
+        $article->title = $request->title;
+        $article->content = $request->content;
+        $article->gambar = $path;
+        $article->save();
         return redirect(route('admin.artikel'));
     }
 
@@ -87,9 +86,7 @@ class ArtikelController extends Controller
         $article->title = $request->input('title');
         $article->content = $request->input('content');
         $gambar = $request->file('gambar');
-        if ($gambar == ''){
-            $article->gambar = $request->old_gambar;
-        } else {
+        if ($gambar != null){
             $path = time() . '.' . $gambar->getClientOriginalExtension();
             $destinationPath = public_path('uploads/admin/article');
             $gambar->move($destinationPath, $path); 
@@ -107,7 +104,8 @@ class ArtikelController extends Controller
      */
     public function destroy($id)
     {
-        $article = Article::findOrFail($id);
+        $article = Article::find($id);
+        $article->delete();
         return redirect()->route('admin.artikel');
     }
 }

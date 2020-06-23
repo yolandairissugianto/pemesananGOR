@@ -6,7 +6,8 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Form Tambah Acara</h4>
-        <form class="cmxform" id="commentForm" method="get" action="#">
+        <form class="cmxform" enctype="multipart/form-data" method="post" action="{{ route('admin.acara.tambahdata') }}">
+          @csrf
           <fieldset>
               <div class="form-group">
                   <div class="col-lg-12 -margin stretch-card">
@@ -17,26 +18,28 @@
                             <a href="dropify.html" class="font-weight-light" target="_blank">More dropify examples</a>
                           </small>
                         </h4>
-                        <input type="file" class="dropify" />
+                        <input type="file" class="dropify" name="gambar" />
                       </div>
                     </div>
                   </div>
                 </div>
             <div class="form-group">
-              <label for="cname">Nama Acara</label>
-              <input id="cname" class="form-control" name="name" minlength="2" type="text" required>
+              <label for="judul">Nama Acara</label>
+              <input id="judul" class="form-control" name="judul" minlength="2" type="text" required>
             </div>
             <div class="form-group">
-              <label for="exampleTextarea1">Deskripsi Acara</label>
-              <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
+              <label for="deskripsi">Deskripsi Acara</label>
+              <textarea class="form-control" name="deskripsi" id="deskripsi" rows="4"></textarea>
             </div>
             <div class="form-group">
-              <label for="cdate">Tanggal Pelaksanaan</label>
-              
-                <input class="form-control" placeholder="dd/mm/yyyy">
-              
+              <label for="tanggal">Tanggal Pelaksanaan</label>
+                <input class="form-control" name="tanggal" placeholder="dd/mm/yyyy">
             </div>
-            <input class="btn btn-outline-success" type="tambah" value="Submit">
+            <div class="form-group">
+              <label for="jam">Jam Pelaksanaan</label>
+                <input class="form-control" name="jam" placeholder="08.00 - 12.00">
+            </div>
+            <input class="btn btn-outline-success" type="submit" value="Submit">
           </fieldset>
         </form>
       </div>

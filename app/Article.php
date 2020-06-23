@@ -8,6 +8,6 @@ class Article extends Model
 {
     protected $guarded = [];
 
-    public $timestamps = false;
+    
     protected $fillable = ['title', 'content', 'gambar'];
 }

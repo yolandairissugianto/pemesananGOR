@@ -42,7 +42,7 @@ class FacilityController extends Controller
         $destinationPath = public_path('uploads/admin/fasilitas');
         $gambar->move($destinationPath, $path);
 
-        $facilities = new Facility([
+        $facility = new Facility([
             'nama_fasilitas' => $request->input('nama_fasilitas'),
             'deskripsi' => $request->input('deskripsi'),
             'olahraga_siang' => $request->input('olahraga_siang'),
@@ -52,7 +52,7 @@ class FacilityController extends Controller
             'tanpa_karcis_sponsor' => $request->input('tanpa_karcis_sponsor'),
             'gambar' => $path
         ]);
-        $facilities->save();
+        $facility->save();
         return redirect(route('admin.fasilitas'));
     }
 
@@ -88,6 +88,7 @@ class FacilityController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $facility = Facility::find($id);
         $facility->nama_fasilitas = $request->input('nama_fasilitas');
         $facility->deskripsi = $request->input('deskripsi');
@@ -97,9 +98,7 @@ class FacilityController extends Controller
         $facility->dengan_sponsor = $request->input('dengan_sponsor');
         $facility->tanpa_karcis_sponsor = $request->input('tanpa_karcis_sponsor');
         $gambar = $request->file('gambar');
-        if ($gambar == ''){
-            $facility->gambar = $request->old_gambar;
-        } else {
+        if ($gambar != null){
             $path = time() . '.' . $gambar->getClientOriginalExtension();
             $destinationPath = public_path('uploads/admin/fasilitas');
             $gambar->move($destinationPath, $path); 
@@ -117,6 +116,8 @@ class FacilityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $facility = Facility::find($id);
+        $facility->delete();
+        return redirect()->route('admin.fasilitas');
     }
 }

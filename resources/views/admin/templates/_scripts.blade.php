@@ -19,3 +19,4 @@
 <script src="{{ asset('assets/js/dropify.js') }}"></script>
 <script src="{{ asset('assets/js/bt-maxLength.js') }}"></script>
 <script src="{{ asset('assets/js/data-table.js') }}"></script>
+<script src="{{ asset('assets/js/modal-demo.js') }}"></script>
