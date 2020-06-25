@@ -11,8 +11,16 @@
 </section>
 
 <div class="content-wrap">
+    @if ($message = Session::get('error'))
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
+                    aria-hidden="true">×</span> </button>
+            <h3 class="text-warning"><i class="fa fa-exclamation-triangle"></i> Warning</h3> {{ $message }}
+        </div>
+    @endif
     <div class="container clearfix">
-        <form>
+        <form method="POST" action="{{ route('pengguna.pemesanan.jam') }}" enctype="multipart/form-data">
+            @csrf
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="nik">NIK</label>
@@ -57,12 +65,12 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="mulai">Jam Mulai Kegiatan</label>
-                    <input type="text" class="form-control" id="mulai" name="mulai"
+                    <input type="text" class="form-control" id="mulai" name="jam_mulai"
                         placeholder="Misal : 06.00 ">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="selesai">Jam Kegiatan Selesai</label>
-                    <input type="text" class="form-control" id="selesai" name="selesai"
+                    <input type="text" class="form-control" id="selesai" name="jam_selesai"
                         placeholder="Misal :08.00">
                 </div>
             </div>

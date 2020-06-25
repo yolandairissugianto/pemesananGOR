@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PemesananController extends Controller
+class PemesananJamController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,24 @@ class PemesananController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $substr_jam_mulai = substr($request->jam_mulai, 0, 2);
+        $substr_jam_selesai = substr($request->jam_selesai, 0, 2);
+
+
+        if($substr_jam_mulai < "06" || $substr_jam_mulai > "17" ){
+            return redirect()->back()->with('error', 'jam mulai 06:00 sampai 17:00');
+        }
+
+        if($substr_jam_selesai < "06" || $substr_jam_selesai > "17" ){
+            return redirect()->back()->with('error', 'jam selesai 06:00 sampai 17:00');
+        }
+
+        if($substr_jam_selesai <= $substr_jam_mulai){
+            return redirect()->back()->with('error', 'jam selesai harus lebih dari jam mulai');
+        }
+
+        
+
     }
 
     /**
