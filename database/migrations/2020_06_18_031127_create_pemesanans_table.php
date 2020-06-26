@@ -17,21 +17,21 @@ class CreatePemesanansTable extends Migration
 
             $table->id();
             $table->integer('id_fasilitas')->unsigned();
+            $table->string('nama');
             $table->dateTime('start');
             $table->dateTime('finish');
-            $table->boolean('penggunaan_olahraga_siang');
-            $table->boolean('penggunaan_olahraga_malam');
-            $table->boolean('penggunaan_selain_olahraga_dengan_menarik_karcis_sponsor');
-            $table->boolean('penggunaan_selain_olahraga_dengan_sponsor');
-            $table->boolean('penggunaan_selain_olahraga_tanpa_karcis_sponsor');
+            $table->tinyInteger('penggunaan_olahraga_siang');
+            $table->tinyInteger('penggunaan_olahraga_malam');
+            $table->tinyInteger('penggunaan_selain_olahraga_dengan_menarik_karcis_sponsor');
+            $table->tinyInteger('penggunaan_selain_olahraga_dengan_sponsor');
+            $table->tinyInteger('penggunaan_selain_olahraga_tanpa_karcis_sponsor');
             $table->integer('price');
-            $table->string('surat');
-            $table->string('nik');
-            $table->string('nama_penanggung_jawab');
-            $table->string('nama_event_organizer');
-            $table->string('surat_pengajuan');
-            $table->string('email');
-            $table->string('no_hp');
+//            $table->string('surat');
+//            $table->string('nama_penanggung_jawab');
+//            $table->string('nama_event_organizer');
+//            $table->string('surat_pengajuan');
+//            $table->string('email');
+//            $table->string('no_hp');
             $table->timestamps();
         });
     }

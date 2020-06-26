@@ -21,9 +21,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('admin')->group(function(){
+Route::prefix('admin')->group(function () {
     Route::get('/login', 'AuthAdmin\LoginController@showLoginForm')->name('admin.login');
-    Route::post('/login', 'AuthAdmin\LoginController@login')->name('admin.login.submit'); 
+    Route::post('/login', 'AuthAdmin\LoginController@login')->name('admin.login.submit');
     Route::get('/logout', 'AuthAdmin\LoginController@logout')->name('admin.logout');
 
     //password reset route
@@ -57,25 +57,22 @@ Route::prefix('admin')->group(function(){
     Route::get('/fasilitas/{id}/edit', 'Admin\FacilityController@edit')->name('admin.fasilitas.edit');
     Route::patch('/fasilitas/{id}', 'Admin\FacilityController@update')->name('admin.fasilitas.editdata');
     Route::delete('/fasilitas/{id}', 'Admin\FacilityController@destroy')->name('admin.fasilitas.hapus');
-    
+
 });
 
-Route::prefix('pengguna')->group(function(){
+Route::prefix('pengguna')->group(function () {
     Route::get('/', function () {
         return view('pengguna.home');
     })->name('pengguna.home');
-    
+
     Route::get('/fasilitas', 'Pengguna\FasilitasController@index')->name('pengguna.fasilitas');
 
     Route::get('/detail-fasilitas/{id}', 'Pengguna\FasilitasController@show')->name('pengguna.detail_fasilitas');
 
-    Route::get('/pemesanan-fasilitas-harian', function () {
-        return view('pengguna.pemesanan_hari');
-    })->name('pengguna.pemesanan_hari');
+    Route::get('{facility}/pemesanan-fasilitas-harian', 'PemesananController@formPemesananPerHari')->name('pengguna.pemesanan_hari');
 
-    Route::get('/pemesanan-fasilitas-jam', function () {
-        return view('pengguna.pemesanan_jam');
-    })->name('pengguna.pemesanan_jam');
+    Route::get('{facility}/pemesanan-fasilitas-jam', 'PemesananController@formPemesananPerJam')->name('pengguna.pemesanan_jam');
+    Route::post('/pesan-perjam', 'PemesananController@pesanPerJam')->name('pengguna.pesan.perjam');
 
     Route::get('/acara', 'Pengguna\EventController@index')->name('pengguna.daftar_acara');
 

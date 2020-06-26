@@ -49,7 +49,7 @@
                                     <br>Malam: {{ $facility -> olahraga_malam }}
                                 </td>
                                 <td>
-                                    <a href="{{ route('pengguna.pemesanan_jam') }}"
+                                    <a href="{{ route('pengguna.pemesanan_jam', $facility) }}"
                                        class="button button-border button-rounded button-small noleftmargin ">Pesan
                                         Tempat</a></td>
                             </tr>
@@ -58,7 +58,7 @@
                                 <td>1 Hari</td>
                                 <td>{{ $facility -> dengan_karcis_sponsor }}</td>
                                 <td>
-                                    <a href="{{ route('pengguna.pemesanan_hari') }}"
+                                    <a href="{{ route('pengguna.pemesanan_hari', $facility) }}"
                                        class="button button-border button-rounded button-small noleftmargin ">Pesan
                                         Tempat</a></td>
                             </tr>
@@ -67,7 +67,7 @@
                                 <td>1 Hari</td>
                                 <td>{{ $facility -> dengan_sponsor }}</td>
                                 <td>
-                                    <a href="{{ route('pengguna.pemesanan_hari') }}"
+                                    <a href="{{ route('pengguna.pemesanan_hari', $facility) }}"
                                        class="button button-border button-rounded button-small noleftmargin ">Pesan
                                         Tempat</a></td>
                             </tr>
@@ -75,7 +75,7 @@
                                 <td>Penggunaan selain olahraga (Tanpa Karcis dan Sponsor)</td>
                                 <td>1 Hari</td>
                                 <td>{{ $facility -> tanpa_karcis_sponsor }}</td>
-                                <td><a href="{{ route('pengguna.pemesanan_hari') }}"
+                                <td><a href="{{ route('pengguna.pemesanan_hari', $facility) }}"
                                        class="button button-border button-rounded button-small noleftmargin">Pesan
                                         Tempat</a></td>
                             </tr>
