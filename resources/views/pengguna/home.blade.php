@@ -102,10 +102,10 @@
 						data-version="5.1.4">
 						<ul>
 							<li class="dark" data-transition="fade" data-slotamount="1" data-masterspeed="1000"
-								data-thumb="{{ asset('images/slider/rev/main/IMG20191230112448.jpg') }}" data-saveperformance="off"
+								data-thumb="{{ asset('images/IMG20191230112448.jpg') }}" data-saveperformance="off"
 								data-title="Welcome to Canvas">
 
-								<img src="{{ asset('images/slider/rev/main/IMG20191230112448.jpg') }}" alt="" data-bgposition="center center"
+								<img src="{{ asset('images/IMG20191230112448.jpg') }}" alt="" data-bgposition="center center"
 									data-bgfit="cover" data-bgrepeat="no-repeat" data-bgparallax="10"
 									class="rev-slidebg" data-no-retina>
 
@@ -152,7 +152,7 @@
 					</a>
 					<div class="container clearfix">
 						<div class="col_three_fifth topmargin-sm bottommargin">
-							<img data-animate="fadeInLeftBig" src="{{ asset('images/services/gor depan.jpg') }}" alt="Imac">
+							<img data-animate="fadeInLeftBig" src="{{ asset('images/IMG_20191230_114541.jpg') }}" alt="Imac">
 						</div>
 						<div class="col_two_fifth topmargin-sm bottommargin-lg col_last">
 							<div class="heading-block topmargin">
@@ -175,7 +175,7 @@
 							<div class="col_half nobottommargin">
 								<div class="ipost clearfix">
 									<div class="entry-image">
-										<a href="#"><img class="image_fade" src="{{ asset('images/magazine/thumb/berita1.jpg') }}"
+										<a href="#"><img class="image_fade" src="{{ asset('images/berita1.jpg') }}"
 												alt="Image"></a>
 									</div>
 									<div class="entry-title">
@@ -195,7 +195,7 @@
 							<div class="col_half col_last nobottommargin">
 								<div class="ipost clearfix">
 									<div class="entry-image">
-										<a href="#"><img class="image_fade" src="{{ asset('images/magazine/thumb/berita2.jpg') }}"
+										<a href="#"><img class="image_fade" src="{{ asset('images/berita2.jpg') }}"
 												alt="Image"></a>
 									</div>
 									<div class="entry-title">
