@@ -57,7 +57,6 @@
                     <input type="text" class="form-control daterange2"
                     value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM" name="date" />
                 </div> --}}
-
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="tgl_kegiatan">Tanggal Kegitan</label>
