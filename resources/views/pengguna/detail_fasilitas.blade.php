@@ -58,7 +58,7 @@
                                 <td>1 Hari</td>
                                 <td>{{ $facility -> dengan_karcis_sponsor }}</td>
                                 <td>
-                                    <a href="{{ route('pengguna.pemesanan_hari', $facility) }}"
+                                    <a href="{{ route('pengguna.pemesanan_hari', ['facility' => $facility, 'tipe' => \App\Pemesanan::$PEMINJAMAN_MENARIK_KARCIS_DAN_SPONSOR]) }}"
                                        class="button button-border button-rounded button-small noleftmargin ">Pesan
                                         Tempat</a></td>
                             </tr>
@@ -67,7 +67,7 @@
                                 <td>1 Hari</td>
                                 <td>{{ $facility -> dengan_sponsor }}</td>
                                 <td>
-                                    <a href="{{ route('pengguna.pemesanan_hari', $facility) }}"
+                                    <a href="{{ route('pengguna.pemesanan_hari', ['facility' => $facility, 'tipe' => \App\Pemesanan::$PEMINJAMAN_HANYA_DENGAN_SPONSOR]) }}"
                                        class="button button-border button-rounded button-small noleftmargin ">Pesan
                                         Tempat</a></td>
                             </tr>
@@ -75,7 +75,7 @@
                                 <td>Penggunaan selain olahraga (Tanpa Karcis dan Sponsor)</td>
                                 <td>1 Hari</td>
                                 <td>{{ $facility -> tanpa_karcis_sponsor }}</td>
-                                <td><a href="{{ route('pengguna.pemesanan_hari', $facility) }}"
+                                <td><a href="{{ route('pengguna.pemesanan_hari', ['facility' => $facility, 'tipe' => \App\Pemesanan::$PEMINJAMAN_TANPA_KARCIS_DAN_SPONSOR]) }}"
                                        class="button button-border button-rounded button-small noleftmargin">Pesan
                                         Tempat</a></td>
                             </tr>

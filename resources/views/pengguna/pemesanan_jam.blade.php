@@ -5,19 +5,74 @@
 @section('content')
     <section id="page-title">
         <div class="container clearfix">
-            <h1>FORM PEMINJAMAN TEMPAT</h1>
-            <span>Untuk Meminjam Tempat Isi Form Dibawah Ini</span>
+            <h1>Daftar Booking</h1>
+            <span>Berikut ini adalah beberapa daftar dari waktu booking untuk fasilitas 1. Mohon pilih selain yang ada di daftar</span>
+        </div>
+    </section>
+    <div class="content-wrap">
+        <div class="container clearfix">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Peminjam</th>
+                    <th>Lama Peminjaman</th>
+                    <th>Start</th>
+                    <th>Finish</th>
+                </tr>
+                </thead>
+                <tbody>
+                @if($pemesanans->count() > 0)
+                    @foreach($pemesanans as $pemesanan)
+                        <tr>
+                            <td>{{ $pemesanan->id }}</td>
+                            <td>{{ $pemesanan->nama }}</td>
+                            @if($pemesanan->penggunaan_olahraga_siang != null || $pemesanan->penggunaan_olahraga_malam != null)
+                                <td>
+                                    {{ (($pemesanan->penggunaan_olahraga_siang != null) ? $pemesanan->penggunaan_olahraga_siang : 0)
+                                    + (($pemesanan->penggunaan_olahraga_malam != null) ? $pemesanan->penggunaan_olahraga_malam : 0) }}
+                                    Jam
+                                </td>
+                            @elseif($pemesanan->penggunaan_selain_olahraga_dengan_menarik_karcis_sponsor != null)
+                                <td>{{ $pemesanan->penggunaan_selain_olahraga_dengan_menarik_karcis_sponsor }} Hari</td>
+                            @elseif($pemesanan->penggunaan_selain_olahraga_dengan_sponsor != null)
+                                <td>{{ $pemesanan->penggunaan_selain_olahraga_dengan_sponsor }} Hari</td>
+                            @elseif($pemesanan->penggunaan_selain_olahraga_tanpa_karcis_sponsor != null)
+                                <td>{{ $pemesanan->penggunaan_selain_olahraga_tanpa_karcis_sponsor }} Hari</td>
+                            @endif
+                            <td>{{ \Carbon\Carbon::parse($pemesanan->start)->translatedFormat('l, d M Y H:i') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($pemesanan->finish)->addSeconds()->translatedFormat('l, d M Y H:i') }}</td>
+                        </tr>
+                    @endforeach
+                @else
+                    <td class="text-success">Belum ada data peminjaman</td>
+                @endif
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <section id="page-title">
+        <div class="container clearfix">
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
+                            aria-hidden="true">×</span></button>
+                    <h3 class="text-success"><i class="fa fa-exclamation-triangle"></i> Success</h3> {{ $message }}
+                </div>
+            @endif
+            @if ($message = Session::get('error'))
+                <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
+                            aria-hidden="true">×</span></button>
+                    <h3 class="text-danger"><i class="fa fa-exclamation-triangle"></i> Kasalahan</h3> {{ $message }}
+                </div>
+            @endif
+            <h1>FORM PEMINJAMAN TEMPAT UNTUK PERJAM</h1>
+            <span>Form ini hanya untuk peminjaman perjam, untuk peminjaman perhari bisa kembali ke halaman sebelumnya</span>
         </div>
     </section>
 
     <div class="content-wrap">
-        @if ($message = Session::get('error'))
-            <div class="alert alert-warning">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
-                        aria-hidden="true">×</span></button>
-                <h3 class="text-warning"><i class="fa fa-exclamation-triangle"></i> Warning</h3> {{ $message }}
-            </div>
-        @endif
         <div class="container clearfix">
             <form method="POST" action="{{ route('pengguna.pesan.perjam') }}" enctype="multipart/form-data">
                 @csrf

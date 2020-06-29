@@ -5,64 +5,148 @@ namespace App\Http\Controllers;
 use App\Facility;
 use App\Pemesanan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
 class PemesananController extends Controller
 {
 
     public function formPemesananPerJam(Facility $facility)
     {
-        return view('pengguna.pemesanan_jam', compact('facility'));
+        $pemesanans = Pemesanan::where('id_fasilitas', $facility->id)->get();
+        return view('pengguna.pemesanan_jam', compact(['facility', 'pemesanans']));
     }
 
-    public function checkStartToFinish(string $_date, string $_start, string $_finish)
+    public function formPemesananPerHari(Facility $facility, $tipe)
     {
-        $start = date('d-m-Y H:i:s', strtotime($_date . $_start));
-        $finish = date('d-m-Y H:i:s', strtotime($_date . $_finish));
+        $pemesanans = Pemesanan::where('id_fasilitas', $facility->id)->get();
+        return view('pengguna.pemesanan_hari', compact(['facility', 'tipe', 'pemesanans']));
+    }
+
+    public function checkJamStartToFinish(string $_date, string $_start, string $_finish)
+    {
+        $start = date('Y-m-d H:i:s', strtotime($_date . $_start));
+        $finish = date('Y-m-d H:i:s', strtotime($_date . $_finish));
         return $start < $finish;
+    }
+
+    public function checkHariStartToFinish(string $start, string $finish)
+    {
+        $_start = date('Y-m-d', strtotime($start));
+        $_finish = date('Y-m-d', strtotime($finish));
+        return $_finish >= $_start;
+    }
+
+    public function checkExistingPemesanan($id_fasilitas, $_start, $_finish)
+    {
+        $start = date('Y-m-d H:i:s', strtotime($_start));
+        $finish = date('Y-m-d H:i:s', strtotime($_finish));
+        $exist = Pemesanan::where('id_fasilitas', $id_fasilitas)
+            ->where(function ($query) use ($start, $finish) {
+                $query->whereBetween('start',
+                    [date('Y-m-d H:i:s', strtotime($start)), date('Y-m-d H:i:s', strtotime($finish))])
+                    ->orWhereBetween('finish',
+                        [date('Y-m-d H:i:s', strtotime($start)), date('Y-m-d H:i:s', strtotime($finish))]);
+            })->get();
+        return $exist->count();
+    }
+
+    public function serializedDate(string $date, string $time)
+    {
+        return Carbon::parse($date . $time);
     }
 
     public function pesanPerJam(Request $request)
     {
         $BATASJAM = Facility::$BATASJAM;
-        if (!$this->checkStartToFinish($request->tgl_kegiatan, $request->jam_mulai, $request->jam_selesai)) {
-            return redirect()->back();
-        }
 
         $fasilitas = Facility::where('id', $request->id_fasilitas)->first();
         $pemesanan = new Pemesanan();
+        $pemesanan->start = $this->serializedDate($request->tgl_kegiatan, $request->jam_mulai);
+        // dikurangi 1 detik
+        $pemesanan->finish = $this->serializedDate($request->tgl_kegiatan, $request->jam_selesai)->subSecond();
 
-        $pemesanan->start = date('d-m-Y H:i:s', strtotime($request->tgl_kegiatan . $request->jam_mulai));
-        $pemesanan->finish = date('d-m-Y H:i:s', strtotime($request->tgl_kegiatan . $request->jam_selesai));
+        if ($this->checkExistingPemesanan($request->id_fasilitas, $pemesanan->start, $pemesanan->finish)) {
+            return redirect()->back()->with(['error' => 'Mohon maaf, waktu yang anda masukan sudah dipesan. Silahkan pilih waktu lain']);
+        }
+
+        if (!$this->checkJamStartToFinish($request->tgl_kegiatan, $request->jam_mulai, $request->jam_selesai)) {
+            return redirect()->back()->with(['error' => 'Jam selesai minimal satu jam setelah jam mulai']);
+        }
+
         $pemesanan->nama = $request->penanggung_jawab;
         $pemesanan->id_fasilitas = $request->id_fasilitas;
 
-        $start = new \DateTime($pemesanan->start);
-        $finish = new \DateTime($pemesanan->finish);
-        $datediff = $start->diff($finish);
-        $interval = (int) $datediff->format("%H");
+        $start = new \DateTime(date('Y-m-d H:i:s', strtotime($request->tgl_kegiatan . $request->jam_mulai)));
+        $finish = new \DateTime(date('Y-m-d H:i:s', strtotime($request->tgl_kegiatan . $request->jam_selesai)));
 
-        $jamMulai = (int) $start->format('H');
-        $jamSelesai = (int) $finish->format('H');
+        $jamMulai = (int)$start->format('H');
+        $jamSelesai = (int)$finish->format('H');
 
         if ($jamMulai < $BATASJAM && $jamSelesai > $BATASJAM) {
             // kondisi jika menyewa di jam siang beserta jam malam
-            $harga = (($BATASJAM - $jamMulai)*$fasilitas->olahraga_siang)+(($jamSelesai - $BATASJAM)*$fasilitas->olahraga_malam);
+            $harga = (($BATASJAM - $jamMulai) * $fasilitas->olahraga_siang) + (($jamSelesai - $BATASJAM) * $fasilitas->olahraga_malam);
             $pemesanan->penggunaan_olahraga_siang = $BATASJAM - $jamMulai;
             $pemesanan->penggunaan_olahraga_malam = $jamSelesai - $BATASJAM;
         } elseif ($jamMulai < $BATASJAM && $jamSelesai <= $BATASJAM) {
             // kondisi jika menyewa di jam siang saja
             $harga = ($jamSelesai - $jamMulai) * $fasilitas->olahraga_siang;
-            $pemesanan->penggunaan_olahraga_siang = $jamSelesai -  $jamMulai;
+            $pemesanan->penggunaan_olahraga_siang = $jamSelesai - $jamMulai;
         } else {
             // kondisi jika menyewa di jam malam saja
             $harga = ($jamSelesai - $jamMulai) * $fasilitas->olahraga_malam;
-            $pemesanan->penggunaan_olahraga_malam = $jamSelesai -  $jamMulai;
+            $pemesanan->penggunaan_olahraga_malam = $jamSelesai - $jamMulai;
         }
-        return $pemesanan;
+
+        $split = explode(" ", $pemesanan->nama);
+        $firstname = array_shift($split);
+        $pemesanan->code = strtolower($firstname) . "-" . $pemesanan->id_fasilitas . "-" . Str::random(6);
+        $pemesanan->price = $harga;
+        $pemesanan->save();
+        return redirect()->back()->with(['success' => 'berhasil menginputkan data peminjaman']);
     }
 
-    public function formPemesananPerHari()
+    public function pesanPerhari(Request $request, Facility $facility, $tipe)
     {
-        return view('pengguna.pemesanan_hari');
+        $fasilitas = Facility::where('id', $request->id_fasilitas)->first();
+        $pemesanan = new Pemesanan();
+
+        $start = Carbon::parse($request->start . "06:00");
+        $finish = Carbon::parse($request->finish . "20:59:59");
+
+        if (!$this->checkHariStartToFinish((string)$request->start, (string)$request->finish)) {
+            return redirect()->back()->with(['error' => 'Tanggal selesai kegiatan tidak boleh kurang dari tanggal mulai kegiatan']);
+        }
+
+        if ($this->checkExistingPemesanan($fasilitas->id, $start, $finish)) {
+            return redirect()->back()->with(['error' => 'Mohon maaf, waktu yang anda masukan sudah dipesan. Silahkan pilih tanggal lain']);
+        }
+
+        $jumlah_jam = $start->diffInHours($finish->addSeconds())+9;
+        $jumlah_hari = $jumlah_jam/24;
+
+        if ($tipe == Pemesanan::$PEMINJAMAN_MENARIK_KARCIS_DAN_SPONSOR) {
+            $harga = $jumlah_hari * $fasilitas->dengan_karcis_sponsor;
+            $pemesanan->penggunaan_selain_olahraga_dengan_menarik_karcis_sponsor = $jumlah_hari;
+        } elseif ($tipe == Pemesanan::$PEMINJAMAN_HANYA_DENGAN_SPONSOR) {
+            $harga = $jumlah_hari * $fasilitas->dengan_sponsor;
+            $pemesanan->penggunaan_selain_olahraga_tanpa_karcis_sponsor = $jumlah_hari;
+        } else {
+            $harga = $jumlah_hari * $fasilitas->tanpa_karcis_sponsor;
+            $pemesanan->penggunaan_selain_olahraga_dengan_menarik_karcis_sponsor = $jumlah_hari;
+        }
+
+        $pemesanan->id_fasilitas = $fasilitas->id;
+        $pemesanan->nama = $request->penanggung_jawab;
+        $pemesanan->start = $start;
+        $pemesanan->finish = $finish;
+        $split = explode(" ", $pemesanan->nama);
+        $firstname = array_shift($split);
+        $pemesanan->code = strtolower($firstname) . "-" . $pemesanan->id_fasilitas . "-" . Str::random(6);
+        $pemesanan->price = $harga;
+        $pemesanan->save();
+        return redirect()->back()->with(['success' => 'berhasil menginputkan data peminjaman']);
+
     }
+
 }

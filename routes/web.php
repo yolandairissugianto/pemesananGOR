@@ -69,7 +69,8 @@ Route::prefix('pengguna')->group(function () {
 
     Route::get('/detail-fasilitas/{id}', 'Pengguna\FasilitasController@show')->name('pengguna.detail_fasilitas');
 
-    Route::get('{facility}/pemesanan-fasilitas-harian', 'PemesananController@formPemesananPerHari')->name('pengguna.pemesanan_hari');
+    Route::get('{facility}/{tipe}/pemesanan-fasilitas-harian', 'PemesananController@formPemesananPerHari')->name('pengguna.pemesanan_hari');
+    Route::post('{facility}/{tipe}/pemesanan-fasilitas-harian', 'PemesananController@pesanPerHari')->name('pengguna.pesan.perhari');
 
     Route::get('{facility}/pemesanan-fasilitas-jam', 'PemesananController@formPemesananPerJam')->name('pengguna.pemesanan_jam');
     Route::post('/pesan-perjam', 'PemesananController@pesanPerJam')->name('pengguna.pesan.perjam');

@@ -16,22 +16,23 @@ class CreatePemesanansTable extends Migration
         Schema::create('pemesanans', function (Blueprint $table) {
 
             $table->id();
+            // format -> nama-id_fasilitas-random(6) digunakan untuk pengecekan chat_id pada telegram api
+            $table->string('code');
             $table->integer('id_fasilitas')->unsigned();
-            $table->string('nama');
+            $table->string('nama_penanggung_jawab');
+            $table->string('nama_event_organizer');
+            $table->string('surat');
+            $table->string('surat_pengajuan');
+            $table->string('email');
+            $table->string('no_hp');
             $table->dateTime('start');
             $table->dateTime('finish');
-            $table->tinyInteger('penggunaan_olahraga_siang');
-            $table->tinyInteger('penggunaan_olahraga_malam');
-            $table->tinyInteger('penggunaan_selain_olahraga_dengan_menarik_karcis_sponsor');
-            $table->tinyInteger('penggunaan_selain_olahraga_dengan_sponsor');
-            $table->tinyInteger('penggunaan_selain_olahraga_tanpa_karcis_sponsor');
+            $table->tinyInteger('penggunaan_olahraga_siang')->nullable();
+            $table->tinyInteger('penggunaan_olahraga_malam')->nullable();
+            $table->tinyInteger('penggunaan_selain_olahraga_dengan_menarik_karcis_sponsor')->nullable();
+            $table->tinyInteger('penggunaan_selain_olahraga_dengan_sponsor')->nullable();
+            $table->tinyInteger('penggunaan_selain_olahraga_tanpa_karcis_sponsor')->nullable();
             $table->integer('price');
-//            $table->string('surat');
-//            $table->string('nama_penanggung_jawab');
-//            $table->string('nama_event_organizer');
-//            $table->string('surat_pengajuan');
-//            $table->string('email');
-//            $table->string('no_hp');
             $table->timestamps();
         });
     }
