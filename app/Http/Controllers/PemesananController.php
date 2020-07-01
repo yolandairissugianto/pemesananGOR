@@ -58,10 +58,25 @@ class PemesananController extends Controller
 
     public function pesanPerJam(Request $request)
     {
+        // batas jam adalah batas waktu antara jam siang dan malam, nilainya 17
         $BATASJAM = Facility::$BATASJAM;
 
         $fasilitas = Facility::where('id', $request->id_fasilitas)->first();
         $pemesanan = new Pemesanan();
+        $pemesanan->id_fasilitas = $request->id_fasilitas;
+        $pemesanan->nik = $request->nik;
+        $pemesanan->event_organizer = $request->eo;
+        $pemesanan->kegiatan = $request->kegiatan;
+        $pemesanan->deskripsi = $request->deskripsi;
+        $pemesanan->nama = $request->penanggung_jawab;
+        $pemesanan->email = $request->email;
+        $pemesanan->no_hp = $request->no_telp;
+
+        $surat = $request->file('surat');
+        $path = time() . '.' .$surat->getClientOriginalExtension();
+        $destinationPath = public_path('uploads/surat-pengajuan/');
+        $pemesanan->surat_pengajuan = $surat->move($destinationPath, $path);
+
         $pemesanan->start = $this->serializedDate($request->tgl_kegiatan, $request->jam_mulai);
         // dikurangi 1 detik
         $pemesanan->finish = $this->serializedDate($request->tgl_kegiatan, $request->jam_selesai)->subSecond();
@@ -74,8 +89,6 @@ class PemesananController extends Controller
             return redirect()->back()->with(['error' => 'Jam selesai minimal satu jam setelah jam mulai']);
         }
 
-        $pemesanan->nama = $request->penanggung_jawab;
-        $pemesanan->id_fasilitas = $request->id_fasilitas;
 
         $start = new \DateTime(date('Y-m-d H:i:s', strtotime($request->tgl_kegiatan . $request->jam_mulai)));
         $finish = new \DateTime(date('Y-m-d H:i:s', strtotime($request->tgl_kegiatan . $request->jam_selesai)));
@@ -103,13 +116,30 @@ class PemesananController extends Controller
         $pemesanan->code = strtolower($firstname) . "-" . $pemesanan->id_fasilitas . "-" . Str::random(6);
         $pemesanan->price = $harga;
         $pemesanan->save();
-        return redirect()->back()->with(['success' => 'berhasil menginputkan data peminjaman']);
+        return redirect()->back()->with([
+            'success' => "Berhasil menginputkan data pengajuan peminjaman.",
+            'code' => "$pemesanan->code"
+        ]);
     }
 
     public function pesanPerhari(Request $request, Facility $facility, $tipe)
     {
         $fasilitas = Facility::where('id', $request->id_fasilitas)->first();
         $pemesanan = new Pemesanan();
+        $pemesanan->id_fasilitas = $fasilitas->id;
+        $pemesanan->nik = $request->nik;
+        $pemesanan->event_organizer = $request->eo;
+        $pemesanan->kegiatan = $request->kegiatan;
+        $pemesanan->deskripsi = $request->deskripsi;
+        $pemesanan->nama = $request->penanggung_jawab;
+        $pemesanan->email = $request->email;
+        $pemesanan->no_hp = $request->no_telp;
+
+        $surat = $request->file('surat');
+        $path = time() . '.' .$surat->getClientOriginalExtension();
+        $destinationPath = public_path('uploads/surat-pengajuan/');
+        $pemesanan->surat_pengajuan = $surat->move($destinationPath, $path);
+
 
         $start = Carbon::parse($request->start . "06:00");
         $finish = Carbon::parse($request->finish . "20:59:59");
@@ -136,8 +166,6 @@ class PemesananController extends Controller
             $pemesanan->penggunaan_selain_olahraga_dengan_menarik_karcis_sponsor = $jumlah_hari;
         }
 
-        $pemesanan->id_fasilitas = $fasilitas->id;
-        $pemesanan->nama = $request->penanggung_jawab;
         $pemesanan->start = $start;
         $pemesanan->finish = $finish;
         $split = explode(" ", $pemesanan->nama);
@@ -145,7 +173,7 @@ class PemesananController extends Controller
         $pemesanan->code = strtolower($firstname) . "-" . $pemesanan->id_fasilitas . "-" . Str::random(6);
         $pemesanan->price = $harga;
         $pemesanan->save();
-        return redirect()->back()->with(['success' => 'berhasil menginputkan data peminjaman']);
+        return redirect()->back()->with(['success' => 'berhasil menginputkan data peminjaman', 'code' => $pemesanan->code]);
 
     }
 

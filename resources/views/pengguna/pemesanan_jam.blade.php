@@ -57,7 +57,10 @@
                 <div class="alert alert-success">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
                             aria-hidden="true">×</span></button>
-                    <h3 class="text-success"><i class="fa fa-exclamation-triangle"></i> Success</h3> {{ $message }}
+                    <h3 class="text-success"><i class="fa fa-exclamation-triangle"></i> Success</h3>
+                    {{ $message }}
+                    <br>Untuk mendapatkan notifikasi melalui Bot Telegram kami, silahkan melakukan chat pada Bot Telegram kami di
+                    <a href="https://t.me/PaperlessProjectBot" target="_blank">BOT GOR TRISANJA</a> dengan mengirimkan kode berikut <b class="text-danger">{{ Session::get('code') }}</b>
                 </div>
             @endif
             @if ($message = Session::get('error'))
@@ -83,35 +86,29 @@
                            value="{{ $facility->nama_fasilitas }}">
                 </div>
                 <div class="form-row">
-                    {{--                <div class="form-group col-md-6">--}}
-                    {{--                    <label for="nik">NIK</label>--}}
-                    {{--                    <input type="text" class="form-control" name="nik" id="nik"--}}
-                    {{--                        placeholder="NIK Penanggung Jawab">--}}
-                    {{--                </div>--}}
+                    <div class="form-group col-md-6">
+                        <label for="nik">NIK</label>
+                        <input type="text" class="form-control" name="nik" id="nik"
+                               placeholder="NIK Penanggung Jawab">
+                    </div>
                     <div class="form-group col-md-6">
                         <label for="penanggung_jawab">Penganggung Jawab</label>
                         <input type="text" class="form-control" name="penanggung_jawab" id="penanggung_jawab"
                                placeholder="Penanggung Jawab / Nama Pemesan">
                     </div>
                 </div>
-                {{--            <div class="form-group">--}}
-                {{--                <label for="eo">EO / Penyelenggara</label>--}}
-                {{--                <input type="text" class="form-control" id="eo" name="eo" placeholder="EO / Penyelenggara">--}}
-                {{--            </div>--}}
-                {{--            <div class="form-group">--}}
-                {{--                <label for="kegiatan">Nama Kegiatan</label>--}}
-                {{--                <input type="text" class="form-control" id="kegiatan" name="kegiatan" placeholder="Nama Kegiatan">--}}
-                {{--            </div>--}}
-                {{--            <div class="form-group">--}}
-                {{--                <label for="deskripsi">Deskripsi Kegiatan</label>--}}
-                {{--                <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"></textarea>--}}
-                {{--            </div>--}}
-
-                {{-- <div class="form-group">
-                    <label>Tanggal dan Jam yang akan dipesan :</label>
-                    <input type="text" class="form-control daterange2"
-                    value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM" name="date" />
-                </div> --}}
+                <div class="form-group">
+                    <label for="eo">EO / Penyelenggara</label>
+                    <input type="text" class="form-control" id="eo" name="eo" placeholder="EO / Penyelenggara">
+                </div>
+                <div class="form-group">
+                    <label for="kegiatan">Nama Kegiatan</label>
+                    <input type="text" class="form-control" id="kegiatan" name="kegiatan" placeholder="Nama Kegiatan">
+                </div>
+                <div class="form-group">
+                    <label for="deskripsi">Deskripsi Kegiatan</label>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"></textarea>
+                </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="tgl_kegiatan">Tanggal Kegitan</label>
@@ -129,22 +126,22 @@
                     </div>
                 </div>
 
-                {{--            <div class="form-group">--}}
-                {{--                <label>Upload Surat Pengajuan</label><br>--}}
-                {{--                <input id="suart" name="surat" type="file" class="file" data-show-preview="false">--}}
-                {{--            </div>--}}
-                {{--            <div class="form-row">--}}
-                {{--                <div class="form-group col-md-6">--}}
-                {{--                    <label for="no_telp">Nomor Telepon</label>--}}
-                {{--                    <input type="text" class="form-control" id="no_telp" name="no_telp"--}}
-                {{--                        placeholder="nomor telepon yang bisa dihubungi">--}}
-                {{--                </div>--}}
-                {{--                <div class="form-group col-md-6">--}}
-                {{--                    <label for="no_telp">Email</label>--}}
-                {{--                    <input type="email" class="form-control" id="email" name="email"--}}
-                {{--                           placeholder="Email">--}}
-                {{--                </div>--}}
-                {{--            </div>--}}
+                <div class="form-group">
+                    <label>Upload Surat Pengajuan</label><br>
+                    <input id="surat" name="surat" type="file" class="file form-control" data-show-preview="true">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="no_telp">Nomor Telepon</label>
+                        <input type="text" class="form-control" id="no_telp" name="no_telp"
+                               placeholder="nomor telepon yang bisa dihubungi">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="no_telp">Email</label>
+                        <input type="email" class="form-control" id="email" name="email"
+                               placeholder="Email">
+                    </div>
+                </div>
                 <button type="submit" class="btn btn-primary">Pesan Tempat</button>
             </form>
         </div>

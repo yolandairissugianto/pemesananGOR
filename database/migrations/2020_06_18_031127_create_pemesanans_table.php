@@ -19,9 +19,11 @@ class CreatePemesanansTable extends Migration
             // format -> nama-id_fasilitas-random(6) digunakan untuk pengecekan chat_id pada telegram api
             $table->string('code');
             $table->integer('id_fasilitas')->unsigned();
-            $table->string('nama_penanggung_jawab');
-            $table->string('nama_event_organizer');
-            $table->string('surat');
+            $table->string('nik');
+            $table->string('nama');
+            $table->string('event_organizer');
+            $table->string('kegiatan');
+            $table->string('deskripsi');
             $table->string('surat_pengajuan');
             $table->string('email');
             $table->string('no_hp');
