@@ -19,6 +19,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('telegram/get-updates', 'TelegramController@getUpdates');
+Route::get('telegram/get-me', 'TelegramController@getMe');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('admin')->group(function () {
