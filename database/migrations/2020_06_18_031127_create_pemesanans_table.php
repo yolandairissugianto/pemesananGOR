@@ -17,8 +17,11 @@ class CreatePemesanansTable extends Migration
 
             $table->id();
             // format -> nama-id_fasilitas-random(6) digunakan untuk pengecekan chat_id pada telegram api
-            $table->string('code');
             $table->integer('id_fasilitas')->unsigned();
+            $table->string('code');
+            $table->boolean('already_paid')->default(false);
+            $table->boolean('have_sent_code')->default(false);
+            $table->boolean('terima_pengajuan')->default(false);
             $table->string('nik');
             $table->string('nama');
             $table->string('event_organizer');
@@ -36,6 +39,8 @@ class CreatePemesanansTable extends Migration
             $table->tinyInteger('penggunaan_selain_olahraga_tanpa_karcis_sponsor')->nullable();
             $table->integer('price');
             $table->timestamps();
+
+            $table->foreign('id_fasilitas')->references('id')->on('facilities');
         });
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pengguna;
 
 use App\Http\Controllers\Controller;
+use App\Pemesanan;
 use Illuminate\Http\Request;
 use App\Facility;
 
@@ -17,6 +18,7 @@ class FasilitasController extends Controller
     public function show($id)
     {
         $facility = Facility::find($id);
-        return view ('pengguna.detail_fasilitas', compact('facility'));
+        $pemesanans = Pemesanan::where('id_fasilitas', $facility->id)->get();
+        return view ('pengguna.detail_fasilitas', compact(['facility', 'pemesanans']));
     }
 }

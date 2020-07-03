@@ -22,31 +22,27 @@
                 </tr>
                 </thead>
                 <tbody>
-                @if($pemesanans->count() > 0)
-                    @foreach($pemesanans as $pemesanan)
-                        <tr>
-                            <td>{{ $pemesanan->id }}</td>
-                            <td>{{ $pemesanan->nama }}</td>
-                            @if($pemesanan->penggunaan_olahraga_siang != null || $pemesanan->penggunaan_olahraga_malam != null)
-                                <td>
-                                    {{ (($pemesanan->penggunaan_olahraga_siang != null) ? $pemesanan->penggunaan_olahraga_siang : 0)
-                                    + (($pemesanan->penggunaan_olahraga_malam != null) ? $pemesanan->penggunaan_olahraga_malam : 0) }}
-                                    Jam
-                                </td>
-                            @elseif($pemesanan->penggunaan_selain_olahraga_dengan_menarik_karcis_sponsor != null)
-                                <td>{{ $pemesanan->penggunaan_selain_olahraga_dengan_menarik_karcis_sponsor }} Hari</td>
-                            @elseif($pemesanan->penggunaan_selain_olahraga_dengan_sponsor != null)
-                                <td>{{ $pemesanan->penggunaan_selain_olahraga_dengan_sponsor }} Hari</td>
-                            @elseif($pemesanan->penggunaan_selain_olahraga_tanpa_karcis_sponsor != null)
-                                <td>{{ $pemesanan->penggunaan_selain_olahraga_tanpa_karcis_sponsor }} Hari</td>
-                            @endif
-                            <td>{{ \Carbon\Carbon::parse($pemesanan->start)->translatedFormat('l, d M Y H:i') }}</td>
-                            <td>{{ \Carbon\Carbon::parse($pemesanan->finish)->addSeconds()->translatedFormat('l, d M Y H:i') }}</td>
-                        </tr>
-                    @endforeach
-                @else
-                    <td class="text-success">Belum ada data peminjaman</td>
-                @endif
+                @foreach($pemesanans as $pemesanan)
+                    <tr>
+                        <td>{{ $pemesanan->id }}</td>
+                        <td>{{ $pemesanan->nama }}</td>
+                        @if($pemesanan->penggunaan_olahraga_siang != null || $pemesanan->penggunaan_olahraga_malam != null)
+                            <td>
+                                {{ (($pemesanan->penggunaan_olahraga_siang != null) ? $pemesanan->penggunaan_olahraga_siang : 0)
+                                + (($pemesanan->penggunaan_olahraga_malam != null) ? $pemesanan->penggunaan_olahraga_malam : 0) }}
+                                Jam
+                            </td>
+                        @elseif($pemesanan->penggunaan_selain_olahraga_dengan_menarik_karcis_sponsor != null)
+                            <td>{{ $pemesanan->penggunaan_selain_olahraga_dengan_menarik_karcis_sponsor }} Hari</td>
+                        @elseif($pemesanan->penggunaan_selain_olahraga_dengan_sponsor != null)
+                            <td>{{ $pemesanan->penggunaan_selain_olahraga_dengan_sponsor }} Hari</td>
+                        @elseif($pemesanan->penggunaan_selain_olahraga_tanpa_karcis_sponsor != null)
+                            <td>{{ $pemesanan->penggunaan_selain_olahraga_tanpa_karcis_sponsor }} Hari</td>
+                        @endif
+                        <td>{{ \Carbon\Carbon::parse($pemesanan->start)->translatedFormat('l, d M Y H:i') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($pemesanan->finish)->addSeconds()->translatedFormat('l, d M Y H:i') }}</td>
+                    </tr>
+                @endforeach
                 </tbody>
             </table>
         </div>
@@ -59,8 +55,10 @@
                             aria-hidden="true">×</span></button>
                     <h3 class="text-success"><i class="fa fa-exclamation-triangle"></i> Success</h3>
                     {{ $message }}
-                    <br>Untuk mendapatkan notifikasi melalui Bot Telegram kami, silahkan melakukan chat pada Bot Telegram kami di
-                    <a href="https://t.me/PaperlessProjectBot" target="_blank">BOT GOR TRISANJA</a> dengan mengirimkan kode berikut <b class="text-danger">{{ Session::get('code') }}</b>
+                    <br>Untuk mendapatkan notifikasi melalui Bot Telegram kami, silahkan melakukan chat pada Bot
+                    Telegram kami di
+                    <a href="https://t.me/PaperlessProjectBot" target="_blank">BOT GOR TRISANJA</a> dengan mengirimkan
+                    kode berikut <b class="text-danger">{{ Session::get('code') }}</b>
                 </div>
             @endif
             @if ($message = Session::get('error'))

@@ -61,6 +61,11 @@ Route::prefix('admin')->group(function () {
     Route::patch('/fasilitas/{id}', 'Admin\FacilityController@update')->name('admin.fasilitas.editdata');
     Route::delete('/fasilitas/{id}', 'Admin\FacilityController@destroy')->name('admin.fasilitas.hapus');
 
+    //Admin Pemesanan
+    Route::get('/pemesanan', 'Admin\PemesananController@index')->name('admin.pemesanan');
+    Route::get('/detail-pemesanan/{pemesanan}', 'Admin\PemesananController@show')->name('admin.pemesanan.detail');
+    Route::get('/detail-pemesanan/{pemesanan}/terima-pengajuan', 'Admin\PemesananController@terima_pengajuan')->name('admin.pemesanan.terima_pengajuan');
+
 });
 
 Route::prefix('pengguna')->group(function () {

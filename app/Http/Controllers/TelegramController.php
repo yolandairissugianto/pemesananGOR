@@ -18,6 +18,14 @@ class TelegramController extends Controller
     public function getUpdates()
     {
         $response = Telegram::getUpdates();
-        return $response;
+        $data = collect($response);
+        $message = $data->where('message.text', '=', 'yolanda-2-gdkagsj')->first();
+        $chat_id = $message->message->chat->id;
+
+        return Telegram::sendMessage([
+            'chat_id' => $chat_id,
+            'text' => 'Pesanan sudah masuk, mohon tunggu konfirmasi dari admin GOR terimakasih hehe.
+            silahkan kirim bukti transfer ke https://t.me/Damarp dengan nominal sekian rupiah ke rekening BANK BRI dengan nomor 79728947778639 ATAS NAMA Damar Permadany'
+        ]);
     }
 }
