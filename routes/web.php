@@ -19,6 +19,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('telegram/get-updates', 'TelegramController@getUpdates');
+Route::get('telegram/get-me', 'TelegramController@getMe');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('admin')->group(function () {
@@ -57,6 +60,11 @@ Route::prefix('admin')->group(function () {
     Route::get('/fasilitas/{id}/edit', 'Admin\FacilityController@edit')->name('admin.fasilitas.edit');
     Route::patch('/fasilitas/{id}', 'Admin\FacilityController@update')->name('admin.fasilitas.editdata');
     Route::delete('/fasilitas/{id}', 'Admin\FacilityController@destroy')->name('admin.fasilitas.hapus');
+
+    //Admin Pemesanan
+    Route::get('/pemesanan', 'Admin\PemesananController@index')->name('admin.pemesanan');
+    Route::get('/detail-pemesanan/{pemesanan}', 'Admin\PemesananController@show')->name('admin.pemesanan.detail');
+    Route::get('/detail-pemesanan/{pemesanan}/terima-pengajuan', 'Admin\PemesananController@terima_pengajuan')->name('admin.pemesanan.terima_pengajuan');
 
 });
 
