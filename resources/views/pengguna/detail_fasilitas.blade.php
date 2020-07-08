@@ -83,9 +83,6 @@
                         </table>
                     </div>
                 </div>
-
-                <!-- <button name="submit" type="submit" id="submit-button" tabindex="5" value="Submit"
-                    class="button button-3d nomargin">Pesan Tempat</button> -->
             </div>
         </div>
     </div>

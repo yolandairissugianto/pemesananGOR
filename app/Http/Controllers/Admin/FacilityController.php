@@ -37,6 +37,29 @@ class FacilityController extends Controller
      */
     public function store(Request $request)
     {
+        
+        $rules = [
+            'nama_fasilitas'          => 'required|regex:/^[\pL\s\-]+$/u||min:5',
+            'deskripsi'       => 'required|min:10',
+            'olahraga_siang'           => 'required|numeric',
+            'olahraga_malam'           => 'required|numeric',
+            'dengan_karcis_sponsor'           => 'required|numeric',
+            'dengan_sponsor'           => 'required|numeric',
+            'tanpa_karcis_sponsor'           => 'required|numeric',
+        ];
+
+        $message = [
+            'required'  => ':attribute tidak boleh kosong',
+            'unique'    => ':attribute sudah di tambahkan',
+            'max'       => ':attribute maksimal :max karakter',
+            'min'       => ':attribute minimal :min karakter',
+            'numeric'   => ':attribute hanya boleh angka',
+            'digits'    => ':attribute harus :digits karakter',
+            'name.regex'     => ':attribute harus huruf semua'
+        ];
+
+        $this->validate($request, $rules, $message);
+        
         $gambar = $request->file('gambar');
         $path = time() . '.' .$gambar->getClientOriginalExtension();
         $destinationPath = public_path('uploads/admin/fasilitas');
@@ -53,7 +76,7 @@ class FacilityController extends Controller
             'gambar' => $path
         ]);
         $facility->save();
-        return redirect(route('admin.fasilitas'));
+        return redirect(route('admin.fasilitas'))->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -64,7 +87,8 @@ class FacilityController extends Controller
      */
     public function show($id)
     {
-        //
+        $facility = Facility::find($id);
+        return view ('admin.fasilitas.info-fasilitas', compact('facility'));
     }
 
     /**
@@ -89,6 +113,28 @@ class FacilityController extends Controller
     public function update(Request $request, $id)
     {
         
+        $rules = [
+            'nama_fasilitas'          => 'required|regex:/^[\pL\s\-]+$/u||min:5',
+            'deskripsi'       => 'required|min:10',
+            'olahraga_siang'           => 'required|numeric',
+            'olahraga_malam'           => 'required|numeric',
+            'dengan_karcis_sponsor'           => 'required|numeric',
+            'dengan_sponsor'           => 'required|numeric',
+            'tanpa_karcis_sponsor'           => 'required|numeric',
+        ];
+
+        $message = [
+            'required'  => ':attribute tidak boleh kosong',
+            'unique'    => ':attribute sudah di tambahkan',
+            'max'       => ':attribute maksimal :max karakter',
+            'min'       => ':attribute minimal :min karakter',
+            'numeric'   => ':attribute hanya boleh angka',
+            'digits'    => ':attribute harus :digits karakter',
+            'name.regex'     => ':attribute harus huruf semua'
+        ];
+
+        $this->validate($request, $rules, $message);
+        
         $facility = Facility::find($id);
         $facility->nama_fasilitas = $request->input('nama_fasilitas');
         $facility->deskripsi = $request->input('deskripsi');
@@ -105,7 +151,7 @@ class FacilityController extends Controller
             $facility->gambar = $path;
         }
         $facility->update();
-        return redirect()->route('admin.fasilitas'); 
+        return redirect()->route('admin.fasilitas')->with('success', 'Data Berhasil Diubah'); 
     }
 
     /**

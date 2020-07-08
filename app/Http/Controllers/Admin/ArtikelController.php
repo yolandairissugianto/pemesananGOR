@@ -37,6 +37,23 @@ class ArtikelController extends Controller
      */
     public function store(Request $request)
     {
+
+        $rules = [
+            'title'          => 'required|regex:/^[\pL\s\-]+$/u||min:5',
+            'content'       => 'required|min:10',
+        ];
+
+        $message = [
+            'required'  => ':attribute tidak boleh kosong',
+            'unique'    => ':attribute sudah di tambahkan',
+            'max'       => ':attribute maksimal :max karakter',
+            'min'       => ':attribute minimal :min karakter',
+            'digits_between' => ':attribute setidaknya :min sampai :max karakter',
+            'title.regex'     => ':attribute harus huruf semua'
+        ];
+
+        $this->validate($request, $rules, $message);
+
         $gambar = $request->file('gambar');
         $path = time() . '.' . $gambar->getClientOriginalExtension();
         $destinationPath = public_path('uploads/admin/article');
@@ -47,7 +64,7 @@ class ArtikelController extends Controller
         $article->content = $request->content;
         $article->gambar = $path;
         $article->save();
-        return redirect(route('admin.artikel'));
+        return redirect(route('admin.artikel'))->with('success', 'Data Berhasil DItambahkan');
     }
 
     /**
@@ -58,7 +75,8 @@ class ArtikelController extends Controller
      */
     public function show($id)
     {
-        //
+        $article = Article::find($id);
+        return view('admin.artikel.info-artikel', compact('article'));
     }
 
     /**
@@ -82,6 +100,23 @@ class ArtikelController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+        $rules = [
+            'title'          => 'required|regex:/^[\pL\s\-]+$/u||min:5',
+            'content'       => 'required|min:10',
+        ];
+
+        $message = [
+            'required'  => ':attribute tidak boleh kosong',
+            'unique'    => ':attribute sudah di tambahkan',
+            'max'       => ':attribute maksimal :max karakter',
+            'min'       => ':attribute minimal :min karakter',
+            'digits_between' => ':attribute setidaknya :min sampai :max karakter',
+            'title.regex'     => ':attribute harus huruf semua'
+        ];
+
+        $this->validate($request, $rules, $message);
+        
         $article = Article::find($id);
         $article->title = $request->input('title');
         $article->content = $request->input('content');
@@ -93,7 +128,7 @@ class ArtikelController extends Controller
             $article->gambar = $path;
         }
         $article->update();
-        return redirect()->route('admin.artikel');
+        return redirect()->route('admin.artikel')->with('success', 'Data Berhasil Diubah');
     }
 
     /**

@@ -37,6 +37,23 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        
+        $rules = [
+            'judul'          => 'required|regex:/^[\pL\s\-]+$/u||min:5',
+            'deskripsi'       => 'required|min:10',
+        ];
+
+        $message = [
+            'required'  => ':attribute tidak boleh kosong',
+            'unique'    => ':attribute sudah di tambahkan',
+            'max'       => ':attribute maksimal :max karakter',
+            'min'       => ':attribute minimal :min karakter',
+            'digits_between' => ':attribute setidaknya :min sampai :max karakter',
+            'title.regex'     => ':attribute harus huruf semua'
+        ];
+
+        $this->validate($request, $rules, $message);
+        
         $gambar = $request->file('gambar');
         $path = time() . '.' .$gambar->getClientOriginalExtension();
         $destinationPath = public_path('uploads/admin/acara');
@@ -50,7 +67,7 @@ class EventController extends Controller
             'gambar' => $path
         ]);
         $event->save();
-        return redirect(route('admin.acara'));
+        return redirect(route('admin.acara'))->with('success', 'Data Berhasil Ditambahkan');
     }
 
     /**
@@ -61,7 +78,8 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        //
+        $event = Event::find($id);
+        return view ('admin.acara.info', compact('event'));
     }
 
     /**
@@ -85,6 +103,23 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+        $rules = [
+            'judul'          => 'required|regex:/^[\pL\s\-]+$/u||min:5',
+            'deskripsi'       => 'required|min:10',
+        ];
+
+        $message = [
+            'required'  => ':attribute tidak boleh kosong',
+            'unique'    => ':attribute sudah di tambahkan',
+            'max'       => ':attribute maksimal :max karakter',
+            'min'       => ':attribute minimal :min karakter',
+            'digits_between' => ':attribute setidaknya :min sampai :max karakter',
+            'title.regex'     => ':attribute harus huruf semua'
+        ];
+
+        $this->validate($request, $rules, $message);
+        
         $event = Event::find($id);
         $event->judul = $request->input('judul');
         $event->deskripsi = $request->input('deskripsi');
@@ -98,7 +133,7 @@ class EventController extends Controller
             $fevent->gambar = $path;
         }
         $event->update();
-        return redirect()->route('admin.acara');
+        return redirect()->route('admin.acara')->with('success', 'Data Berhasil Diubah');
     }
 
     /**
@@ -111,6 +146,6 @@ class EventController extends Controller
     {
         $event = Event::find($id);
         $event->delete();
-        return redirect()->route('admin.acara');
+        return redirect()->route('admin.acara')->with('danger', 'Data Berhasil Dihapus');
     }
 }

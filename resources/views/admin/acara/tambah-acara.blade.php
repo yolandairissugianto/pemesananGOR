@@ -18,18 +18,29 @@
                             <a href="dropify.html" class="font-weight-light" target="_blank">More dropify examples</a>
                           </small>
                         </h4>
-                        <input type="file" class="dropify" name="gambar" />
+                        <input type="file" class="dropify" data-allowed-file-extensions="png jpeg jpg"
+                              data-max-file-size="2M" name="gambar" name="gambar" />
                       </div>
                     </div>
                   </div>
                 </div>
             <div class="form-group">
               <label for="judul">Nama Acara</label>
-              <input id="judul" class="form-control" name="judul" minlength="2" type="text" required>
+              <input class="form-control {{ $errors->has('judul')?'is-invalid':'' }}" name="judul" value="{{ old('judul') }}" minlength="2" type="text">
+              @if ($errors->has('judul'))
+                  <span class="invalid-feedback" role="alert">
+                    <p><b>{{ $errors->first('judul') }}</b></p>
+                  </span>
+              @endif
             </div>
             <div class="form-group">
               <label for="deskripsi">Deskripsi Acara</label>
-              <textarea class="form-control" name="deskripsi" id="deskripsi" rows="4"></textarea>
+              <textarea class="form-control {{ $errors->has('deskripsi')?'is-invalid':'' }}" name="deskripsi" rows="4">{{ old('deskripsi') }}</textarea>
+              @if ($errors->has('deskripsi'))
+                  <span class="invalid-feedback" role="alert">
+                    <p><b>{{ $errors->first('deskripsi') }}</b></p>
+                  </span>
+              @endif
             </div>
             <div class="form-group">
               <label for="tanggal">Tanggal Pelaksanaan</label>

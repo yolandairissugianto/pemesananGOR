@@ -41,6 +41,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/artikel/{id}/edit', 'Admin\ArtikelController@edit')->name('admin.artikel.edit');
     Route::patch('/artikel/{id}', 'Admin\ArtikelController@update')->name('admin.artikel.editdata');
     Route::delete('/artikel/{id}', 'Admin\ArtikelController@destroy')->name('admin.artikel.hapus');
+    Route::get('/artikel/{id}/info', 'Admin\ArtikelController@show')->name('admin.artikel.info');
 
     //Admin Acara
     Route::get('/acara', 'Admin\EventController@index')->name('admin.acara');
@@ -49,6 +50,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/acara/{id}/edit', 'Admin\EventController@edit')->name('admin.acara.edit');
     Route::patch('/acara/{id}', 'Admin\EventController@update')->name('admin.acara.editdata');
     Route::delete('/acara/{id}', 'Admin\EventController@destroy')->name('admin.acara.hapus');
+    Route::get('/acara/{id}/info', 'Admin\EventController@show')->name('admin.acara.info');
 
     //Admin Fasilitas
     Route::get('/fasilitas', 'Admin\FacilityController@index')->name('admin.fasilitas');
@@ -57,6 +59,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/fasilitas/{id}/edit', 'Admin\FacilityController@edit')->name('admin.fasilitas.edit');
     Route::patch('/fasilitas/{id}', 'Admin\FacilityController@update')->name('admin.fasilitas.editdata');
     Route::delete('/fasilitas/{id}', 'Admin\FacilityController@destroy')->name('admin.fasilitas.hapus');
+    Route::get('/fasilitas/{id}/info', 'Admin\FacilityController@show')->name('admin.fasilitas.info');
 
 });
 

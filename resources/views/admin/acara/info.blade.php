@@ -5,10 +5,9 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Form Tambah Acara</h4>
-        <form enctype="multipart/form-data" method="post" action="{{ route('admin.acara.editdata', $event->id) }}">
-          @method('PATCH')
-           @csrf
+        <h4 class="card-title">Info Acara</h4>
+        <form enctype="multipart/form-data">
+            @csrf
           <fieldset>
               <div class="form-group">
                   <div class="col-lg-12 -margin stretch-card">
@@ -21,39 +20,27 @@
                         </h4>
                         <input type="hidden" value="{{ $event->gambar }}" name="old_gambar">
                           <input data-default-file={{ asset('uploads/admin/acara/'.$event->gambar) }} 
-                            type="file" class="dropify" name="gambar" data-allowed-file-extensions="png jpeg jpg"
-                            data-max-file-size="2M" name="gambar" />
+                            type="file" class="dropify" name="gambar" disabled />
                       </div>
                     </div>
                   </div>
                 </div>
             <div class="form-group">
               <label for="judul">Nama Acara</label>
-              <input value="{{ $event -> judul }}" class="form-control {{ $errors->has('judul')?'is-invalid':'' }}" name="judul" minlength="2" type="text">
-              @if ($errors->has('judul'))
-                  <span class="invalid-feedback" role="alert">
-                    <p><b>{{ $errors->first('judul') }}</b></p>
-                  </span>
-              @endif
+              <input value="{{ $event -> judul }}" class="form-control" style="background-color: #2b2e4c" name="judul" minlength="2" type="text" disabled>
             </div>
             <div class="form-group">
               <label for="deskripsi">Deskripsi Acara</label>
-              <textarea class="form-control {{ $errors->has('deskripsi')?'is-invalid':'' }}" name="deskripsi" rows="4">{{ $event -> deskripsi }}</textarea>
-              @if ($errors->has('deskripsi'))
-                  <span class="invalid-feedback" role="alert">
-                    <p><b>{{ $errors->first('deskripsi') }}</b></p>
-                  </span>
-              @endif
+              <textarea class="form-control" style="background-color: #2b2e4c" name="deskripsi" rows="4" disabled>{{ $event -> deskripsi }}</textarea>
             </div>
             <div class="form-group">
               <label for="tanggal">Tanggal Pelaksanaan</label>
-              <input class="form-control" name="tanggal" value="{{ $event -> tgl_acara }}">
+              <input class="form-control" style="background-color: #2b2e4c" name="tanggal" value="{{ $event -> tgl_acara }}" disabled>
             </div>
             <div class="form-group">
               <label for="jam">Jam Pelaksanaan</label>
-              <input class="form-control" name="jam" value="{{ $event -> jam_acara }}">
+              <input class="form-control" style="background-color: #2b2e4c" name="jam" value="{{ $event -> jam_acara }}" disabled>
             </div>
-            <input class="btn btn-primary" type="submit" value="Update">
             <a href="{{ route('admin.acara') }}" class="btn btn-outline-danger">Cancel</a> 
           </fieldset>
         </form>
