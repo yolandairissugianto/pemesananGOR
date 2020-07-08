@@ -25,7 +25,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.acara') }}">
+        <a class="nav-link" href="{{ route('admin.pemesanan') }}">
           <i class="mdi mdi-clipboard-arrow-down menu-icon"></i>
           <span class="menu-title">Sewa Fasilitas</span>
         </a>

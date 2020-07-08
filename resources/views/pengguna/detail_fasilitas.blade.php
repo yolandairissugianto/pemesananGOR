@@ -23,10 +23,48 @@
                              height="auto" alt="">
                     </div>
 
-                    <div class="entry-content notopmargin">
+                    <div class="entry-content">
                         <h4>{{ $facility -> deskripsi }}</h4>
-                        <p>
-                        </p>
+                        <br>
+                        <br>
+                        <h3>Data Peminjaman</h3>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Peminjam</th>
+                                <th>Lama Peminjaman</th>
+                                <th>Start</th>
+                                <th>Finish</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($pemesanans as $pemesanan)
+                                <tr>
+                                    <td>{{ $pemesanan->id }}</td>
+                                    <td>{{ $pemesanan->nama }}</td>
+                                    @if($pemesanan->penggunaan_olahraga_siang != null || $pemesanan->penggunaan_olahraga_malam != null)
+                                        <td>
+                                            {{ (($pemesanan->penggunaan_olahraga_siang != null) ? $pemesanan->penggunaan_olahraga_siang : 0)
+                                            + (($pemesanan->penggunaan_olahraga_malam != null) ? $pemesanan->penggunaan_olahraga_malam : 0) }}
+                                            Jam
+                                        </td>
+                                    @elseif($pemesanan->penggunaan_selain_olahraga_dengan_menarik_karcis_sponsor != null)
+                                        <td>{{ $pemesanan->penggunaan_selain_olahraga_dengan_menarik_karcis_sponsor }} Hari</td>
+                                    @elseif($pemesanan->penggunaan_selain_olahraga_dengan_sponsor != null)
+                                        <td>{{ $pemesanan->penggunaan_selain_olahraga_dengan_sponsor }} Hari</td>
+                                    @elseif($pemesanan->penggunaan_selain_olahraga_tanpa_karcis_sponsor != null)
+                                        <td>{{ $pemesanan->penggunaan_selain_olahraga_tanpa_karcis_sponsor }} Hari</td>
+                                    @endif
+                                    <td>{{ \Carbon\Carbon::parse($pemesanan->start)->translatedFormat('l, d M Y H:i') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($pemesanan->finish)->addSeconds()->translatedFormat('l, d M Y H:i') }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+
+                        <br>
+                        <br>
                         <table class="table table-striped">
                             <thead>
                             <tr>
