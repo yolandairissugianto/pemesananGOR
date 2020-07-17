@@ -67,8 +67,25 @@
                             aria-hidden="true">×</span></button>
                     <h3 class="text-success"><i class="fa fa-exclamation-triangle"></i> Success</h3>
                     {{ $message }}
-                    <br>Untuk mendapatkan notifikasi melalui Bot Telegram kami, silahkan melakukan chat pada Bot Telegram kami di
-                    <a href="https://t.me/PaperlessProjectBot" target="_blank">BOT GOR TRISANJA</a> dengan mengirimkan kode berikut -> <b class="text-danger">{{ Session::get('code') }}</b>
+                    <br><br>Detail biaya peminjaman:
+                    @if($pemesanan->penggunaan_selain_olahraga_dengan_menarik_karcis_sponsor != null)
+                        <br>1. Biaya untuk penggunaan selain olahraga dengan menarik karcis dan
+                        sponsor: {{ $pemesanan->penggunaan_selain_olahraga_dengan_menarik_karcis_sponsor
+                        . ' Hari x Rp. ' . number_format($pemesanan->fasilitas->dengan_karcis_sponsor) }}
+                    @elseif($pemesanan->penggunaan_selain_olahraga_dengan_sponsor != null)
+                        <br>1. Biaya untuk penggunaan selain olahraga dengan
+                        sponsor: {{ $pemesanan->penggunaan_selain_olahraga_dengan_sponsor
+                        . ' Hari x Rp. ' . number_format($pemesanan->fasilitas->dengan_sponsor) }}
+                    @elseif($pemesanan->penggunaan_olahraga_siang == null && $pemesanan->penggunaan_olahraga_malam != null)
+                        <br>1. Biaya untuk penggunaan selain olahraga tanpa karcis dan
+                        sponsor: {{ $pemesanan->penggunaan_selain_olahraga_tanpa_karcis_sponsor
+                        . ' Hari x Rp. ' . number_format($pemesanan->fasilitas->tanpa_karcis_sponsor) }}
+                    @endif
+                    <br>Total : Rp. {{ number_format($pemesanan->price) }}
+                    <br>
+                    <br>Langkah selanjutnya anda diharuskan melakukan chat kepada Bot Telegram kami di
+                    <a href="https://t.me/PaperlessProjectBot" target="_blank">BOT GOR TRISANJA</a> dengan mengirimkan
+                    kode berikut <b class="text-danger">{{ $pemesanan->code }}</b>
                 </div>
             @endif
             @if ($message = Session::get('error'))

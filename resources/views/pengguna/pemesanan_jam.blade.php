@@ -49,16 +49,31 @@
     </div>
     <section id="page-title">
         <div class="container clearfix">
+
             @if ($message = Session::get('success'))
                 <div class="alert alert-success">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
                             aria-hidden="true">×</span></button>
                     <h3 class="text-success"><i class="fa fa-exclamation-triangle"></i> Success</h3>
                     {{ $message }}
-                    <br>Untuk mendapatkan notifikasi melalui Bot Telegram kami, silahkan melakukan chat pada Bot
-                    Telegram kami di
+                    <br><br>Detail biaya peminjaman:
+                    @if($pemesanan->penggunaan_olahraga_siang != null && $pemesanan->penggunaan_olahraga_malam != null)
+                        <br>1. Biaya untuk jam siang: {{ $pemesanan->penggunaan_olahraga_siang
+                        . ' Jam x Rp. ' . number_format($pemesanan->fasilitas->olahraga_siang) }}
+                        <br>2. Biaya untuk jam malam: {{ $pemesanan->penggunaan_olahraga_malam
+                        . ' Jam x Rp. ' . number_format($pemesanan->fasilitas->olahraga_malam) }}
+                    @elseif($pemesanan->penggunaan_olahraga_siang != null && $pemesanan->penggunaan_olahraga_malam == null)
+                        <br>1. Biaya untuk jam siang: {{ $pemesanan->penggunaan_olahraga_siang
+                        . ' Jam x Rp. ' . number_format($pemesanan->fasilitas->olahraga_siang) }}
+                    @elseif($pemesanan->penggunaan_olahraga_siang == null && $pemesanan->penggunaan_olahraga_malam != null)
+                        <br>1. Biaya untuk jam malam: {{ $pemesanan->penggunaan_olahraga_malam
+                        . ' Jam x Rp. ' . number_format($pemesanan->fasilitas->olahraga_malam) }}
+                    @endif
+                    <br>Total : Rp. {{ number_format($pemesanan->price) }}
+                    <br>
+                    <br>Langkah selanjutnya anda diharuskan melakukan chat kepada Bot Telegram kami di
                     <a href="https://t.me/PaperlessProjectBot" target="_blank">BOT GOR TRISANJA</a> dengan mengirimkan
-                    kode berikut <b class="text-danger">{{ Session::get('code') }}</b>
+                    kode berikut <b class="text-danger">{{ $pemesanan->code }}</b>
                 </div>
             @endif
             @if ($message = Session::get('error'))
