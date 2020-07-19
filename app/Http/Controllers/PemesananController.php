@@ -39,6 +39,12 @@ class PemesananController extends Controller
         return $_finish >= $_start;
     }
 
+    public function checkToday(string $date)
+    {
+        $_date = date('Y-m-d', strtotime($date));
+        return $_date > now()->format('Y-m-d');
+    }
+
     public function checkExistingPemesanan($id_fasilitas, $_start, $_finish)
     {
         //mengubah string menjadi date dan time sesuai pada database
@@ -91,6 +97,10 @@ class PemesananController extends Controller
             return redirect()->back()->with(['error' => 'Mohon maaf, waktu yang anda masukan sudah dipesan. Silahkan pilih waktu lain']);
         }
 
+        if (!$this->checkToday($request->tgl_kegiatan)) {
+            return redirect()->back()->with(['error' => 'Mohon maaf, peminjaman minimal satu hari sebelum hari H']);
+        }
+
         if (!$this->checkJamStartToFinish($request->tgl_kegiatan, $request->jam_mulai, $request->jam_selesai)) {
             return redirect()->back()->with(['error' => 'Jam selesai minimal satu jam setelah jam mulai']);
         }
@@ -125,8 +135,12 @@ class PemesananController extends Controller
         $pemesanan->save();
         return redirect()->back()->with([
             'success' => "Berhasil menginputkan data pengajuan peminjaman.",
+<<<<<<< HEAD
             'pemesanan' => $pemesanan,
         ]);
+=======
+        ], compact('pemesanan'));
+>>>>>>> 23a0f1f129c0506957b8d6b5160d7663d4f2cd96
     }
 
     public function pesanPerhari(Request $request, Facility $facility, $tipe)
@@ -159,6 +173,10 @@ class PemesananController extends Controller
             return redirect()->back()->with(['error' => 'Mohon maaf, waktu yang anda masukan sudah dipesan. Silahkan pilih tanggal lain']);
         }
 
+        if (!$this->checkToday($request->start)) {
+            return redirect()->back()->with(['error' => 'Mohon maaf, peminjaman minimal satu hari sebelum hari H']);
+        }
+
         $jumlah_jam = $start->diffInHours($finish->addSeconds())+9;
         $jumlah_hari = $jumlah_jam/24;
 
@@ -180,8 +198,9 @@ class PemesananController extends Controller
         $pemesanan->code = strtolower($firstname) . "-" . $pemesanan->id_fasilitas . "-" . Str::random(6);
         $pemesanan->price = $harga;
         $pemesanan->save();
-        return redirect()->back()->with(['success' => 'berhasil menginputkan data peminjaman', 'code' => $pemesanan->code]);
-
+        return redirect()->back()->with([
+            'success' => "Berhasil menginputkan data pengajuan peminjaman.",
+        ], compact('pemesanan'));
     }
 
 }
