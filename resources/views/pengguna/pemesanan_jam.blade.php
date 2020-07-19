@@ -47,27 +47,28 @@
             </table>
         </div>
     </div>
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
+                    aria-hidden="true">×</span></button>
+            <h3 class="text-success"><i class="fa fa-exclamation-triangle"></i> Success</h3>
+            {{ $message }}
+            <br>Untuk mendapatkan notifikasi melalui Bot Telegram kami, silahkan melakukan chat pada Bot
+            Telegram kami di
+            <a href="{{ App\Pemesanan::$URL_BOT }}" target="_blank">BOT GOR TRISANJA</a> dengan mengirimkan
+            kode berikut <b class="text-danger">{{ Session::get('code') }}</b>
+            <br>
+        </div>
+    @endif
+    @if ($message = Session::get('error'))
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
+                    aria-hidden="true">×</span></button>
+            <h3 class="text-danger"><i class="fa fa-exclamation-triangle"></i> Kasalahan</h3> {{ $message }}
+        </div>
+    @endif
     <section id="page-title">
         <div class="container clearfix">
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
-                            aria-hidden="true">×</span></button>
-                    <h3 class="text-success"><i class="fa fa-exclamation-triangle"></i> Success</h3>
-                    {{ $message }}
-                    <br>Untuk mendapatkan notifikasi melalui Bot Telegram kami, silahkan melakukan chat pada Bot
-                    Telegram kami di
-                    <a href="https://t.me/PaperlessProjectBot" target="_blank">BOT GOR TRISANJA</a> dengan mengirimkan
-                    kode berikut <b class="text-danger">{{ Session::get('code') }}</b>
-                </div>
-            @endif
-            @if ($message = Session::get('error'))
-                <div class="alert alert-danger">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
-                            aria-hidden="true">×</span></button>
-                    <h3 class="text-danger"><i class="fa fa-exclamation-triangle"></i> Kasalahan</h3> {{ $message }}
-                </div>
-            @endif
             <h1>FORM PEMINJAMAN TEMPAT UNTUK PERJAM</h1>
             <span>Form ini hanya untuk peminjaman perjam, untuk peminjaman perhari bisa kembali ke halaman sebelumnya</span>
         </div>

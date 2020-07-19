@@ -72,9 +72,7 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::prefix('pengguna')->group(function () {
-    Route::get('/', function () {
-        return view('pengguna.home');
-    })->name('pengguna.home');
+    Route::get('/', 'Pengguna\HomeController@index')->name('pengguna.home');
 
     Route::get('/fasilitas', 'Pengguna\FasilitasController@index')->name('pengguna.fasilitas');
 

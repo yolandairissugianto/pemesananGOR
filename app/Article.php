@@ -8,6 +8,4 @@ class Article extends Model
 {
     protected $guarded = [];
 
-    
-    protected $fillable = ['title', 'content', 'gambar'];
 }

@@ -125,7 +125,7 @@ class PemesananController extends Controller
         $pemesanan->save();
         return redirect()->back()->with([
             'success' => "Berhasil menginputkan data pengajuan peminjaman.",
-            'code' => "$pemesanan->code"
+            'pemesanan' => $pemesanan,
         ]);
     }
 
