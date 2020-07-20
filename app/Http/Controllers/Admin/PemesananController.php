@@ -51,7 +51,7 @@ class PemesananController extends Controller
                 ."\nJumlah total biaya peminjaman adalah Rp. " . number_format($pemesanan->price) ."."
                 ."\nPembayaran bisa dilakukan cash di Ruang Admin GOR Trisanja."
                 ."\nAtau bisa juga ditransfer ke akun Bank BRI atas nama GOR TRISANJA dengan Nomor Rekening 4498-2379-23723."
-                ." Kemudian Kirimkan bukti transfer tersebut ke akun Telegram Admin GOR Trisanja di https://t.me/DamarP"
+                ." Kemudian Kirimkan bukti transfer tersebut ke akun Telegram Admin GOR Trisanja di https://t.me/YolandaIris"
         ]);
 
         return redirect()->back()->with(['success' => "Telah menerima pengajuan peminjaman $pemesanan->fasilitas->nama_fasilitas dari $pemesanan->nama"]);

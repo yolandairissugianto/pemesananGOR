@@ -72,7 +72,7 @@
                     <br>Total : Rp. {{ number_format($pemesanan->price) }}
                     <br>
                     <br>Langkah selanjutnya anda diharuskan melakukan chat kepada Bot Telegram kami di
-                    <a href="https://t.me/PaperlessProjectBot" target="_blank">BOT GOR TRISANJA</a> dengan mengirimkan
+                    <a href="{{ \App\Pemesanan::$URL_BOT }}" target="_blank">BOT GOR TRISANJA</a> dengan mengirimkan
                     kode berikut <b class="text-danger">{{ $pemesanan->code }}</b>
                 </div>
             @endif
