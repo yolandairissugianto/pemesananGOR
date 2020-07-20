@@ -69,9 +69,6 @@
     @endif
     <section id="page-title">
         <div class="container clearfix">
-<<<<<<< HEAD
-=======
-
             @if ($message = Session::get('success'))
                 <div class="alert alert-success">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
@@ -105,7 +102,6 @@
                     <h3 class="text-danger"><i class="fa fa-exclamation-triangle"></i> Kasalahan</h3> {{ $message }}
                 </div>
             @endif
->>>>>>> 23a0f1f129c0506957b8d6b5160d7663d4f2cd96
             <h1>FORM PEMINJAMAN TEMPAT UNTUK PERJAM</h1>
             <span>Form ini hanya untuk peminjaman perjam, untuk peminjaman perhari bisa kembali ke halaman sebelumnya</span>
         </div>
