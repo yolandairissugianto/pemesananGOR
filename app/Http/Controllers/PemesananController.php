@@ -25,6 +25,7 @@ class PemesananController extends Controller
 
     public function checkJamStartToFinish(string $_date, string $_start, string $_finish)
     {
+        //mengubah string menjadi date dan time sesuai pada database
         $start = date('Y-m-d H:i:s', strtotime($_date . $_start));
         $finish = date('Y-m-d H:i:s', strtotime($_date . $_finish));
         return $start < $finish;
@@ -32,6 +33,7 @@ class PemesananController extends Controller
 
     public function checkHariStartToFinish(string $start, string $finish)
     {
+        //mengubah string menjadi date sesuai pada database
         $_start = date('Y-m-d', strtotime($start));
         $_finish = date('Y-m-d', strtotime($finish));
         return $_finish >= $_start;
@@ -45,8 +47,11 @@ class PemesananController extends Controller
 
     public function checkExistingPemesanan($id_fasilitas, $_start, $_finish)
     {
+        //mengubah string menjadi date dan time sesuai pada database
         $start = date('Y-m-d H:i:s', strtotime($_start));
         $finish = date('Y-m-d H:i:s', strtotime($_finish));
+        //mengambil semua data yg ada di database untuk dicek apakah ada yang sama / bersinggungan
+        //kemudian dicek satu persatu, jika tidak ada yg bersinggungan disimpan pada variable $exist
         $exist = Pemesanan::where('id_fasilitas', $id_fasilitas)
             ->where(function ($query) use ($start, $finish) {
                 $query->whereBetween('start',
@@ -65,6 +70,7 @@ class PemesananController extends Controller
     public function pesanPerJam(Request $request)
     {
         // batas jam adalah batas waktu antara jam siang dan malam, nilainya 17
+        //memanggil fungsi $BATASJAM yg ada pad model Facility
         $BATASJAM = Facility::$BATASJAM;
 
         $fasilitas = Facility::where('id', $request->id_fasilitas)->first();
@@ -124,11 +130,17 @@ class PemesananController extends Controller
         $split = explode(" ", $pemesanan->nama);
         $firstname = array_shift($split);
         $pemesanan->code = strtolower($firstname) . "-" . $pemesanan->id_fasilitas . "-" . Str::random(6);
+        
         $pemesanan->price = $harga;
         $pemesanan->save();
         return redirect()->back()->with([
             'success' => "Berhasil menginputkan data pengajuan peminjaman.",
+<<<<<<< HEAD
+            'pemesanan' => $pemesanan,
+        ]);
+=======
         ], compact('pemesanan'));
+>>>>>>> 23a0f1f129c0506957b8d6b5160d7663d4f2cd96
     }
 
     public function pesanPerhari(Request $request, Facility $facility, $tipe)

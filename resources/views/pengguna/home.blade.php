@@ -172,46 +172,26 @@
 							<div class="fancy-title title-border">
 								<h4>Recent Posts</h4>
 							</div>
-							<div class="col_half nobottommargin">
+							@foreach ($articles as $article)
+							<div class="col_half {{ ($articles->last() == $article) ? 'col_last' : '' }} nobottommargin">
 								<div class="ipost clearfix">
 									<div class="entry-image">
-										<a href="#"><img class="image_fade" src="{{ asset('images/berita1.jpg') }}"
-												alt="Image"></a>
+										<a href="#">
+											<img src="{{ asset('uploads/admin/article/'. $article -> gambar) }}" width="auto" height="auto" alt="">
+										</a>
 									</div>
 									<div class="entry-title">
-										<h3><a href="blog-single.html">Wawali Jumadi Hadiri Upacara Peringatan Hari
-												Infanteri di GOR Trisanja Slawi</a></h3>
+										<h3><a href="blog-single.html">{{ $article -> title }}</a></h3>
 									</div>
 									<ul class="entry-meta clearfix">
-										<li><i class="icon-calendar3"></i>19 Desember 2019</li>
+										<li><i class="icon-calendar3"></i>{{ $article -> created_at }}</li>
 									</ul>
 									<div class="entry-content">
-										<p>Wakil Wali Kota Tegal Muhamad Jumadi, menghadiri upacara Penyerahan Simbul
-											Yudha Wastu Pramuka Jaya dan Peringatan Hari Infanteri ke 71 Tahun 2019, di
-											Lapangan Sepak Bola GOR Trisanja Slawi</p>
+										<p>{{ substr($article -> content, 0, 70) }}</p>
 									</div>
 								</div>
 							</div>
-							<div class="col_half col_last nobottommargin">
-								<div class="ipost clearfix">
-									<div class="entry-image">
-										<a href="#"><img class="image_fade" src="{{ asset('images/berita2.jpg') }}"
-												alt="Image"></a>
-									</div>
-									<div class="entry-title">
-										<h3><a href="blog-single.html">Gor Indoor Trisanja Slawi Resmi Dimiliki Pemkab
-												Tegal</a></h3>
-									</div>
-									<ul class="entry-meta clearfix">
-										<li><i class="icon-calendar3"></i> 29 April 2019</li>
-									</ul>
-									<div class="entry-content">
-										<p>Penyerahan gor yang diresmikan sejak 25 Januari 2019 lalu oleh Kementerian
-											Pemuda dan Olahraga (Kemenpora) itu diserahkan kepada Pemkab Tegal,
-											bertempat di Ruang Rapat Bupati Tegal.</p>
-									</div>
-								</div>
-							</div>
+							@endforeach
 							<div class="clear"></div>
 						</div>
 						<div class="col_one_third nobottommargin col_last">

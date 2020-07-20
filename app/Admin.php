@@ -12,6 +12,10 @@ class Admin extends Authenticatable
 {
     use Notifiable;
 
+    protected $guard = 'admin';
+
+    protected $redirectTo = '/admin';
+
     /**
      * The attributes that are mass assignable.
      *
