@@ -130,17 +130,12 @@ class PemesananController extends Controller
         $split = explode(" ", $pemesanan->nama);
         $firstname = array_shift($split);
         $pemesanan->code = strtolower($firstname) . "-" . $pemesanan->id_fasilitas . "-" . Str::random(6);
-        
+
         $pemesanan->price = $harga;
         $pemesanan->save();
         return redirect()->back()->with([
             'success' => "Berhasil menginputkan data pengajuan peminjaman.",
-<<<<<<< HEAD
-            'pemesanan' => $pemesanan,
-        ]);
-=======
         ], compact('pemesanan'));
->>>>>>> 23a0f1f129c0506957b8d6b5160d7663d4f2cd96
     }
 
     public function pesanPerhari(Request $request, Facility $facility, $tipe)
