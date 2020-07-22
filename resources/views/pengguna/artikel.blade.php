@@ -20,7 +20,7 @@
                     <img src="{{ asset('uploads/admin/article/'. $article -> gambar) }}" width="auto" height="auto" alt="">
                 </div>
                 <div class="entry-title">
-                    <h2><a href="detail-artikel.html">{{ $article -> title }}</a></h2>
+                    <h2><a href="#">{{ $article -> title }}</a></h2>
                 </div>
                 <ul class="entry-meta clearfix">
                     <li><i class="icon-calendar3"></i>{{ $article -> created_at }}</li>

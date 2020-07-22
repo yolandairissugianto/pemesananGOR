@@ -12,5 +12,11 @@ class ArtikelController extends Controller
     {
         $articles = Article::all();
         return view('pengguna.artikel', compact('articles'));
-    } 
+    }
+
+    // public function show()
+    // {
+    //     $article = Article::find($id);
+    //     return view('pengguna.detail_artikel', compact('article'));
+    // }
 }

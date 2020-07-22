@@ -18,27 +18,19 @@
                 <div class="entry clearfix">
 
                     <div class="entry-title">
-                        <h2>WAWALI JUMADI HADIRI UPACARA PERINGATAN HARI INFANTERI DI GOR TRISANJA SLAWI</h2>
+                        <h2>{{ $article -> title }}</h2>
                     </div>
 
                     <ul class="entry-meta clearfix">
-                        <li><i class="icon-calendar3"></i>19 Desember 2019</li>
+                        <li><i class="icon-calendar3"></i>{{ $article -> created_at }}</li>
                     </ul>
 
                     <div class="entry-image">
-                        <a href="#"><img src="{{ asset('images/blog/full/berita1.jpg') }}" alt="Blog Single"></a>
+                        <a href="#"><img src="{{ asset('uploads/admin/article/'. $article -> gambar) }}" width="auto" height="auto" alt=""></a>
                     </div>
 
                     <div class="entry-content notopmargin">
-                        <p>akil Wali Kota Tegal Muhamad Jumadi, menghadiri upacara Penyerahan Simbul 
-                            Yudha Wastu Pramuka Jaya dan Peringatan Hari Infanteri ke 71 Tahun 2019, 
-                            di Lapangan Sepak Bola GOR Trisanja Slawi, Kamis (19/12/2019).Upacara tersebut 
-                            mengusung tema Bersama Rakyat Infanteri Kuat.</p>
-                        <p>Sebagai Inpektur upacara yakni Kasdam IV/Diponegoro Brigadir Jenderal TNI Teguh Muji Angkasa.</p>
-                        
-                        <p>Dalam amanatnya, Brigadir Jenderal TNI Teguh Muji Angkasa membacakan sambutan Komandan Pusat Infanteri Mayor Jendral TNI Teguh Pudjo Rumekso, 
-                            bahwa salah satu catatan peristiwa penting yang menjadi tonggak sejarah infanteri adalah peristiwa saat menghadapi Agresi Militer 
-                            Belanda II tanggal 19 Desember 1948.</p>
+                        <p>{{ $article -> content }}</p>
                     </div>
                 </div>
 

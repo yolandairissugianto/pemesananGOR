@@ -68,6 +68,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/pemesanan', 'Admin\PemesananController@index')->name('admin.pemesanan');
     Route::get('/detail-pemesanan/{pemesanan}', 'Admin\PemesananController@show')->name('admin.pemesanan.detail');
     Route::get('/detail-pemesanan/{pemesanan}/terima-pengajuan', 'Admin\PemesananController@terima_pengajuan')->name('admin.pemesanan.terima_pengajuan');
+    Route::get('/detail-pemesanan/{pemesanan}/terima-pembayaran', 'Admin\PemesananController@terima_pembayaran')->name('admin.pemesanan.terima_pembayaran');
 
 });
 
@@ -87,6 +88,8 @@ Route::prefix('pengguna')->group(function () {
     Route::get('/acara', 'Pengguna\EventController@index')->name('pengguna.daftar_acara');
 
     Route::get('/artikel', 'Pengguna\ArtikelController@index')->name('pengguna.artikel');
+
+    // Route::get('/detail-artikel/{id}', 'Pengguna\ArtikelController@show')->name('pengguna.detail_artikel');
 
     Route::get('/detail-artikel', function () {
         return view('pengguna.detail_artikel');
