@@ -14,9 +14,11 @@ class ArtikelController extends Controller
         return view('pengguna.artikel', compact('articles'));
     }
 
-    // public function show()
-    // {
-    //     $article = Article::find($id);
-    //     return view('pengguna.detail_artikel', compact('article'));
-    // }
+    public function show($id)
+    {
+        $article = Article::find($id);
+
+        $recents = Article::orderBy('created_at','ASC')->LIMIT(2)->get();
+        return view ('pengguna.detail_artikel', compact('article', 'recents'));
+    }
 }

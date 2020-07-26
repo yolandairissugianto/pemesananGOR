@@ -220,8 +220,6 @@
 	@include('pengguna.templates._footer')
 	</div>
 
-	<div id="gotoTop" class="icon-angle-up"></div>
-
 	@include('pengguna.templates._scripts')
 </body>
 

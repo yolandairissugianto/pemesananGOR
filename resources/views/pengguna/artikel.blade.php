@@ -20,14 +20,14 @@
                     <img src="{{ asset('uploads/admin/article/'. $article -> gambar) }}" width="auto" height="auto" alt="">
                 </div>
                 <div class="entry-title">
-                    <h2><a href="#">{{ $article -> title }}</a></h2>
+                    <h2><a href="{{ route('pengguna.detail_artikel', $article->id) }}">{{ $article -> title }}</a></h2>
                 </div>
                 <ul class="entry-meta clearfix">
                     <li><i class="icon-calendar3"></i>{{ $article -> created_at }}</li>
                 </ul>
                 <div class="entry-content">
                     <p>{{ $article -> content }}</p>
-                    <a href="{{ route('pengguna.detail_artikel') }}" class="more-link">Lanjut Membaca</a>
+                    <a href="{{ route('pengguna.detail_artikel', $article->id) }}" class="more-link">Lanjut Membaca</a>
                 </div>
             </div>
             @endforeach

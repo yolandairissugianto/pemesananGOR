@@ -108,52 +108,52 @@
                     <div class="form-group col-md-6">
                         <label for="nik">NIK</label>
                         <input type="text" class="form-control" name="nik" id="nik"
-                               placeholder="NIK Penanggung Jawab">
+                               placeholder="NIK Penanggung Jawab" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="penanggung_jawab">Penganggung Jawab</label>
                         <input type="text" class="form-control" name="penanggung_jawab" id="penanggung_jawab"
-                               placeholder="Penanggung Jawab / Nama Pemesan">
+                               placeholder="Penanggung Jawab / Nama Pemesan" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="eo">EO / Penyelenggara</label>
-                    <input type="text" class="form-control" id="eo" name="eo" placeholder="EO / Penyelenggara">
+                    <input type="text" class="form-control" id="eo" name="eo" placeholder="EO / Penyelenggara" required>
                 </div>
                 <div class="form-group">
                     <label for="kegiatan">Nama Kegiatan</label>
-                    <input type="text" class="form-control" id="kegiatan" name="kegiatan" placeholder="Nama Kegiatan">
+                    <input type="text" class="form-control" id="kegiatan" name="kegiatan" placeholder="Nama Kegiatan" required>
                 </div>
                 <div class="form-group">
                     <label for="deskripsi">Deskripsi Kegiatan</label>
-                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"></textarea>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3" required></textarea>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="start">Tanggal Mulai Kegitan</label>
-                        <input type="date" class="form-control" id="start" name="start">
+                        <input type="date" class="form-control" id="start" name="start" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="finish">Tanggal Selesai Kegitan</label>
-                        <input type="date" class="form-control" id="finish" name="finish">
+                        <input type="date" class="form-control" id="finish" name="finish" required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>Upload Surat Pengajuan</label><br>
-                    <input id="surat" name="surat" type="file" class="file form-control" data-show-preview="true">
+                    <input required  accept="application/pdf" id="surat" name="surat" type="file" class="file form-control" data-show-preview="true">
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="no_telp">Nomor Telepon</label>
                         <input type="text" class="form-control" id="no_telp" name="no_telp"
-                               placeholder="nomor telepon yang bisa dihubungi">
+                               placeholder="nomor telepon yang bisa dihubungi" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email"
-                               placeholder="Email">
+                               placeholder="Email" required>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Pesan Tempat</button>

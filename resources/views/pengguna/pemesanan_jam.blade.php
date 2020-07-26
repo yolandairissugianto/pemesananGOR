@@ -140,7 +140,7 @@
 
                 <div class="form-group">
                     <label>Upload Surat Pengajuan</label><br>
-                    <input id="surat" name="surat" type="file" class="file form-control" data-show-preview="true">
+                    <input required id="surat" name="surat" type="file" class="file form-control" data-show-preview="true">
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">

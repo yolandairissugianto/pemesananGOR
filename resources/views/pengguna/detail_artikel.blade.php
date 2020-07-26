@@ -26,83 +26,11 @@
                     </ul>
 
                     <div class="entry-image">
-                        <a href="#"><img src="{{ asset('uploads/admin/article/'. $article -> gambar) }}" width="auto" height="auto" alt=""></a>
+                        <img src="{{ asset('uploads/admin/article/'. $article -> gambar) }}" width="auto" height="auto" alt="">
                     </div>
 
                     <div class="entry-content notopmargin">
                         <p>{{ $article -> content }}</p>
-                    </div>
-                </div>
-
-                <h4>Related Posts:</h4>
-                <div class="related-posts clearfix">
-                    <div class="col_half nobottommargin">
-                        <div class="mpost clearfix">
-                            <div class="entry-image">
-                                <a href="#"><img src="{{ asset('images/blog/small/10.jpg') }}" alt="Blog Single"></a>
-                            </div>
-                            <div class="entry-c">
-                                <div class="entry-title">
-                                    <h4><a href="#">This is an Image Post</a></h4>
-                                </div>
-                                <ul class="entry-meta clearfix">
-                                    <li><i class="icon-calendar3"></i> 10th July 2014</li>
-                                    <li><a href="#"><i class="icon-comments"></i> 12</a></li>
-                                </ul>
-                                <div class="entry-content">Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. Mollitia nisi perferendis.</div>
-                            </div>
-                        </div>
-                        <div class="mpost clearfix">
-                            <div class="entry-image">
-                                <a href="#"><img src="{{ asset('images/blog/small/20.jpg') }}" alt="Blog Single"></a>
-                            </div>
-                            <div class="entry-c">
-                                <div class="entry-title">
-                                    <h4><a href="#">This is a Video Post</a></h4>
-                                </div>
-                                <ul class="entry-meta clearfix">
-                                    <li><i class="icon-calendar3"></i> 24th July 2014</li>
-                                    <li><a href="#"><i class="icon-comments"></i> 16</a></li>
-                                </ul>
-                                <div class="entry-content">Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. Mollitia nisi perferendis.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col_half nobottommargin col_last">
-                        <div class="mpost clearfix">
-                            <div class="entry-image">
-                                <a href="#"><img src="{{ asset('images/blog/small/21.jpg') }}" alt="Blog Single"></a>
-                            </div>
-                            <div class="entry-c">
-                                <div class="entry-title">
-                                    <h4><a href="#">This is a Gallery Post</a></h4>
-                                </div>
-                                <ul class="entry-meta clearfix">
-                                    <li><i class="icon-calendar3"></i> 8th Aug 2014</li>
-                                    <li><a href="#"><i class="icon-comments"></i> 8</a></li>
-                                </ul>
-                                <div class="entry-content">Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. Mollitia nisi perferendis.</div>
-                            </div>
-                        </div>
-                        <div class="mpost clearfix">
-                            <div class="entry-image">
-                                <a href="#"><img src="{{ asset('images/blog/small/22.jpg') }}" alt="Blog Single"></a>
-                            </div>
-                            <div class="entry-c">
-                                <div class="entry-title">
-                                    <h4><a href="#">This is an Audio Post</a></h4>
-                                </div>
-                                <ul class="entry-meta clearfix">
-                                    <li><i class="icon-calendar3"></i> 22nd Aug 2014</li>
-                                    <li><a href="#"><i class="icon-comments"></i> 21</a></li>
-                                </ul>
-                                <div class="entry-content">Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. Mollitia nisi perferendis.</div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -117,81 +45,25 @@
                         </ul>
                             <div class="tab-content clearfix" id="tabs-2">
                                 <div id="recent-post-list-sidebar">
+                                    @foreach ($recents as $recent)
                                     <div class="spost clearfix">
+                                        
                                         <div class="entry-image">
                                             <a href="#" class="nobg"><img class="rounded-circle"
-                                                    src="{{ asset('images/magazine/small/1.jpg') }}" alt=""></a>
+                                                    src="{{ asset('uploads/admin/article/'. $recent -> gambar) }}" alt=""></a>
                                         </div>
                                         <div class="entry-c">
                                             <div class="entry-title">
-                                                <h4><a href="#">Lorem ipsum dolor sit amet, consectetur</a>
+                                                <h4><a href="#">{{ $recent -> title }}</a>
                                                 </h4>
                                             </div>
                                             <ul class="entry-meta">
-                                                <li>10th July 2014</li>
+                                                <li>{{ $recent -> created_at }}</li>
                                             </ul>
                                         </div>
+                            
                                     </div>
-                                    <div class="spost clearfix">
-                                        <div class="entry-image">
-                                            <a href="#" class="nobg"><img class="rounded-circle"
-                                                    src="{{ asset('images/magazine/small/2.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="entry-c">
-                                            <div class="entry-title">
-                                                <h4><a href="#">Elit Assumenda vel amet dolorum quasi</a>
-                                                </h4>
-                                            </div>
-                                            <ul class="entry-meta">
-                                                <li>10th July 2014</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="spost clearfix">
-                                        <div class="entry-image">
-                                            <a href="#" class="nobg"><img class="rounded-circle"
-                                                    src="{{ asset('images/magazine/small/3.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="entry-c">
-                                            <div class="entry-title">
-                                                <h4><a href="#">Debitis nihil placeat, illum est nisi</a>
-                                                </h4>
-                                            </div>
-                                            <ul class="entry-meta">
-                                                <li>10th July 2014</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="spost clearfix">
-                                        <div class="entry-image">
-                                            <a href="#" class="nobg"><img class="rounded-circle"
-                                                    src="{{ asset('images/magazine/small/1.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="entry-c">
-                                            <div class="entry-title">
-                                                <h4><a href="#">Lorem ipsum dolor sit amet, consectetur</a>
-                                                </h4>
-                                            </div>
-                                            <ul class="entry-meta">
-                                                <li>10th July 2014</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="spost clearfix">
-                                        <div class="entry-image">
-                                            <a href="#" class="nobg"><img class="rounded-circle"
-                                                    src="{{ asset('images/magazine/small/2.jpg') }}" alt=""></a>
-                                        </div>
-                                        <div class="entry-c">
-                                            <div class="entry-title">
-                                                <h4><a href="#">Elit Assumenda vel amet dolorum quasi</a>
-                                                </h4>
-                                            </div>
-                                            <ul class="entry-meta">
-                                                <li>10th July 2014</li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

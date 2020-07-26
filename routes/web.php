@@ -89,11 +89,8 @@ Route::prefix('pengguna')->group(function () {
 
     Route::get('/artikel', 'Pengguna\ArtikelController@index')->name('pengguna.artikel');
 
-    // Route::get('/detail-artikel/{id}', 'Pengguna\ArtikelController@show')->name('pengguna.detail_artikel');
+    Route::get('/detail-artikel/{id}', 'Pengguna\ArtikelController@show')->name('pengguna.detail_artikel');
 
-    Route::get('/detail-artikel', function () {
-        return view('pengguna.detail_artikel');
-    })->name('pengguna.detail_artikel');
 
 
     Route::post('pemesanan/jam', 'PemesananJamSiangController@store')->name('pengguna.pemesanan.jam');
