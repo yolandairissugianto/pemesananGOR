@@ -30,7 +30,7 @@ class PemesananController extends Controller
 
     public function export()
     {
-        return Excel::download(new PemesananExport, 'test.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        return Excel::download(new PemesananExport, date('ymdHis') . '-pemesanan.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 
     public function downloadSuratPengajuan(Pemesanan $pemesanan)

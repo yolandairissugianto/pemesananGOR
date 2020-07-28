@@ -37,7 +37,8 @@ class PemesananExport implements FromCollection, WithStrictNullComparison, WithH
             'Waktu Mulai',
             'Waktu Selesai',
             'Jenis Peminjaman',
-            'Lama Peminjaman'
+            'Lama Peminjaman',
+            'Biaya Peminjaman'
         ];
     }
 
@@ -76,7 +77,8 @@ class PemesananExport implements FromCollection, WithStrictNullComparison, WithH
             $row->start,
             $row->finish,
             $jenis_peminjaman,
-            $lama_peminjaman
+            $lama_peminjaman,
+            $row->price
 
         ];
         return $fields;
