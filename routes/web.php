@@ -67,8 +67,13 @@ Route::prefix('admin')->group(function () {
     //Admin Pemesanan
     Route::get('/pemesanan', 'Admin\PemesananController@index')->name('admin.pemesanan');
     Route::get('/detail-pemesanan/{pemesanan}', 'Admin\PemesananController@show')->name('admin.pemesanan.detail');
-    Route::get('/detail-pemesanan/{pemesanan}/terima-pengajuan', 'Admin\PemesananController@terima_pengajuan')->name('admin.pemesanan.terima_pengajuan');
-    Route::get('/detail-pemesanan/{pemesanan}/terima-pembayaran', 'Admin\PemesananController@terima_pembayaran')->name('admin.pemesanan.terima_pembayaran');
+    Route::get('/detail-pemesanan/{pemesanan}/download-pengajuan', 'Admin\PemesananController@downloadSuratPengajuan')
+        ->name('admin.pemesanan.download.pengajuan');
+    Route::get('/detail-pemesanan/{pemesanan}/terima-pengajuan', 'Admin\PemesananController@terima_pengajuan')
+        ->name('admin.pemesanan.terima_pengajuan');
+    Route::post('/detail-pemesanan/{pemesanan}/kirim-ijin-penggunaan', 'Admin\PemesananController@kirimSuratIjinPenggunaan')
+        ->name('admin.pemesanan.kirim-ijin-penggunaan');
+    Route::get('/pemesanan/export', 'Admin\PemesananController@export')->name('admin.pemesanan.export');
 
 });
 

@@ -87,7 +87,9 @@ class PemesananController extends Controller
         $surat = $request->file('surat');
         $path = time() . '.' .$surat->getClientOriginalExtension();
         $destinationPath = public_path('uploads/surat-pengajuan/');
-        $pemesanan->surat_pengajuan = $surat->move($destinationPath, $path);
+        $surat->move($destinationPath, $path);
+
+        $pemesanan->surat_pengajuan = $path;
 
         $pemesanan->start = $this->serializedDate($request->tgl_kegiatan, $request->jam_mulai);
         // dikurangi 1 detik
@@ -154,7 +156,9 @@ class PemesananController extends Controller
         $surat = $request->file('surat');
         $path = time() . '.' .$surat->getClientOriginalExtension();
         $destinationPath = public_path('uploads/surat-pengajuan/');
-        $pemesanan->surat_pengajuan = $surat->move($destinationPath, $path);
+        $surat->move($destinationPath, $path);
+
+        $pemesanan->surat_pengajuan = $path;
 
 
         $start = Carbon::parse($request->start . "06:00");

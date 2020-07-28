@@ -2,9 +2,23 @@
 
 @section('content')
     <div class="content-wrapper">
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+        @endif
+        @if ($message = Session::get('error'))
+            <div class="alert alert-warning alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong class="text-google">{{ $message }}</strong>
+            </div>
+        @endif
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Detail Pemesanan</h4>
+                <a href="{{ route('admin.pemesanan.download.pengajuan', $pemesanan) }}"
+                   class="btn btn-sm btn-outline-dribbble">Download Surat Pengajuan</a>
+                <h4 class="card-title mt-3">Detail Pemesanan</h4>
                 <div class="row">
                     <div class="col-12">
                         <p>Fasilitas :</p>
@@ -17,15 +31,26 @@
                         <p>{{ $pemesanan->kegiatan }}</p><br>
                         <p>Status :</p>
                         @if($pemesanan->already_paid)
-                            <p class="text-google">Sudah Bayar</p>
+                            <p class="text-google">Pemesanan telah selesai</p>
                         @elseif($pemesanan->terima_pengajuan)
                             <p class="text-behance">Menunggu Pembayaran</p>
-                            <a href="{{ route('admin.pemesanan.terima_pembayaran', $pemesanan) }}" class="btn btn-sm btn-outline-twitter">
-                                <i class="mdi mdi-check"></i>&emsp;Sudah bayar dan Kirim Notif</a>
+                            <form action="{{ route('admin.pemesanan.kirim-ijin-penggunaan', $pemesanan->id) }}"
+                                  method="post" enctype="multipart/form-data" class="mt-3">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="ijin-penggunaan">Surat Ijin Penggunaan</label>
+                                    <input id="ijin-penggunaan" class="form-control" name="surat_ijin" type="file"
+                                           required>
+                                </div>
+                                <button class="btn btn-sm btn-outline-twitter" type="submit">
+                                    <i class="mdi mdi-send"></i>&emsp;Kirim Surat Ijin Penggunaan
+                                </button>
+                            </form>
                         @elseif($pemesanan->have_sent_code)
                             <p class="text-behance">Sudah kirim kode ke Bot Telegram</p>
-                            <a href="{{ route('admin.pemesanan.terima_pengajuan', $pemesanan) }}" class="btn btn-sm btn-outline-dribbble">
-                                <i class="mdi mdi-send"></i>&emsp;Terima Pengajuan dan Kirim Notifikasi</a>
+                            <a href="{{ route('admin.pemesanan.terima_pengajuan', $pemesanan) }}"
+                               class="btn btn-sm btn-outline-dribbble">
+                                <i class="mdi mdi-send mt-3"></i>&emsp;Terima Pengajuan dan Kirim Notifikasi</a>
                         @else
                             <p class="text-danger">Menunggu peminjam mengirim kode ke BOT</p>
                         @endif

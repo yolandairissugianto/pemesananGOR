@@ -7,7 +7,7 @@
                 <h4 class="card-title">Data Pemesanan</h4>
                 <div class="row">
                     <div class="col-12">
-                        <a class="btn btn-outline-info float-right" style="margin-bottom: 10px" href="#">Tambah Data</a>
+                        <a class="btn btn-outline-info float-right" style="margin-bottom: 10px" href="{{ route('admin.pemesanan.export') }}">Cetak Laporan Excel</a>
                         <div class="table-responsive">
                             <table id="order-listing" class="table">
                                 <thead>
@@ -28,8 +28,8 @@
                                 @foreach($pemesanans as $key => $pemesanan)
                                     <tr>
                                         <td>{{ $key+1 }}</td>
-                                        <td>{{ $pemesanan->fasilitas->nama_fasilitas }}</td>
-                                        <td>{{ $pemesanan->nama }}</td>
+                                        <td><a href="{{ route('admin.pemesanan.detail', $pemesanan) }}">{{ $pemesanan->fasilitas->nama_fasilitas }}</a></td>
+                                        <td><a href="{{ route('admin.pemesanan.detail', $pemesanan) }}">{{ $pemesanan->nama }}</a></td>
                                         <td>{{ $pemesanan->event_organizer }}</td>
                                         <td>{{ $pemesanan->kegiatan }}</td>
                                         @if($pemesanan->penggunaan_olahraga_siang != null || $pemesanan->penggunaan_olahraga_malam != null)
@@ -51,7 +51,7 @@
                                         <td>{{ \Illuminate\Support\Carbon::create($pemesanan->start)->format('d-m-y H:i') }}</td>
                                         <td>{{ \Illuminate\Support\Carbon::create($pemesanan->finish)->format('d-m-y H:i') }}</td>
                                         @if($pemesanan->already_paid)
-                                            <td class="text-success">Sudah bayar</td>
+                                            <td class="text-success">Pemesanan Telah Selesai</td>
                                         @elseif($pemesanan->terima_pengajuan)
                                             <td class="text-info">Menunggu Pembayaran</td>
                                         @elseif($pemesanan->have_sent_code)
