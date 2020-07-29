@@ -13,13 +13,13 @@ class PemesananController extends Controller
 
     public function formPemesananPerJam(Facility $facility)
     {
-        $pemesanans = Pemesanan::where('id_fasilitas', $facility->id)->get();
+        $pemesanans = Pemesanan::where('id_fasilitas', $facility->id)->paginate(5);
         return view('pengguna.pemesanan_jam', compact(['facility', 'pemesanans']));
     }
 
     public function formPemesananPerHari(Facility $facility, $tipe)
     {
-        $pemesanans = Pemesanan::where('id_fasilitas', $facility->id)->get();
+        $pemesanans = Pemesanan::where('id_fasilitas', $facility->id)->paginate(5);
         return view('pengguna.pemesanan_hari', compact(['facility', 'tipe', 'pemesanans']));
     }
 
@@ -69,6 +69,31 @@ class PemesananController extends Controller
 
     public function pesanPerJam(Request $request)
     {
+        $rules = [
+            'nik'               => 'required|digits:16|numeric',
+            'penanggung_jawab'  => 'required|regex:/^[\pL\s\-]+$/u',
+            'eo'                => 'required',
+            'kegiatan'          => 'required',
+            'deskripsi'         => 'required',
+            'tgl_kegiatan'      => 'required',
+            'jam_mulai'         => 'required',
+            'jam_selesai'       => 'required',
+            'surat'             => 'required|file|mimes:pdf|max:2048',
+            'no_telp'           => 'required|numeric|digits_between:11,13|regex:/(08)[0-9]{9}/',
+            'email'             => 'required|email',
+        ];
+
+        $message = [
+            'required'          => ':attribute tidak boleh kosong',
+            'unique'            => ':attribute sudah terdaftar',
+            'numeric'           => ':attribute hanya boleh nomor',
+            'digits_between'    => ':attribute setidaknya :min sampai :max karakter',
+            'telephone.regex'   => ':attribute harus sesuai format 08xx-xxxx-xxxx',
+            'name.regex'        => ':attribute harus huruf semua'
+        ];
+
+        $this->validate($request, $rules, $message);
+
         // batas jam adalah batas waktu antara jam siang dan malam, nilainya 17
         //memanggil fungsi $BATASJAM yg ada pad model Facility
         $BATASJAM = Facility::$BATASJAM;
@@ -142,6 +167,31 @@ class PemesananController extends Controller
 
     public function pesanPerhari(Request $request, Facility $facility, $tipe)
     {
+
+        $rules = [
+            'nik'               => 'required|digits:16|numeric',
+            'penanggung_jawab'  => 'required|regex:/^[\pL\s\-]+$/u',
+            'eo'                => 'required',
+            'kegiatan'          => 'required',
+            'deskripsi'         => 'required',
+            'start'             => 'required',
+            'finish'            => 'required',
+            'surat'             => 'required|file|mimes:pdf|max:2048',
+            'no_telp'           => 'required|numeric|digits_between:11,13|regex:/(08)[0-9]{9}/',
+            'email'             => 'required|email',
+        ];
+
+        $message = [
+            'required'          => ':attribute tidak boleh kosong',
+            'unique'            => ':attribute sudah terdaftar',
+            'numeric'           => ':attribute hanya boleh nomor',
+            'digits_between'    => ':attribute setidaknya :min sampai :max karakter',
+            'telephone.regex'   => ':attribute harus sesuai format 08xx-xxxx-xxxx',
+            'name.regex'        => ':attribute harus huruf semua'
+        ];
+
+        $this->validate($request, $rules, $message);
+
         $fasilitas = Facility::where('id', $request->id_fasilitas)->first();
         $pemesanan = new Pemesanan();
         $pemesanan->id_fasilitas = $fasilitas->id;

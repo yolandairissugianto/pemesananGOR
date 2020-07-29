@@ -24,7 +24,7 @@
                 <tbody>
                 @foreach($pemesanans as $pemesanan)
                     <tr>
-                        <td>{{ $pemesanan->id }}</td>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $pemesanan->nama }}</td>
                         @if($pemesanan->penggunaan_olahraga_siang != null || $pemesanan->penggunaan_olahraga_malam != null)
                             <td>
@@ -45,6 +45,7 @@
                 @endforeach
                 </tbody>
             </table>
+            {{ $pemesanans->links() }}
         </div>
     </div>
     <section id="page-title">
@@ -100,58 +101,125 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="nik">NIK</label>
-                        <input type="text" class="form-control" name="nik" id="nik"
-                               placeholder="NIK Penanggung Jawab">
+                        <input type="text" class="form-control {{$errors->has('nik')?'is-invalid':''}}"
+                         name="nik" id="nik" placeholder="NIK Penanggung Jawab" required value="{{ old('nik') }}">
+                        @if ($errors->has('nik'))
+                            <span class="invalid-feedback" role="alert">
+                                <p><b>{{ $errors->first('nik') }}</b></p>
+                            </span>
+                        @endif
                     </div>
                     <div class="form-group col-md-6">
                         <label for="penanggung_jawab">Penganggung Jawab</label>
-                        <input type="text" class="form-control" name="penanggung_jawab" id="penanggung_jawab"
-                               placeholder="Penanggung Jawab / Nama Pemesan">
+                        <input type="text" class="form-control {{$errors->has('penanggung_jawab')?'is-invalid':''}}" 
+                        name="penanggung_jawab" id="penanggung_jawab" value="{{ old('penanggung_jawab') }}"
+                        placeholder="Penanggung Jawab / Nama Pemesan" required>
+                        @if ($errors->has('penanggung_jawab'))
+                            <span class="invalid-feedback" role="alert">
+                                <p><b>{{ $errors->first('penanggung_jawab') }}</b></p>
+                            </span>
+                        @endif
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="eo">EO / Penyelenggara</label>
-                    <input type="text" class="form-control" id="eo" name="eo" placeholder="EO / Penyelenggara">
+                    <input type="text" class="form-control {{$errors->has('eo')?'is-invalid':''}}" 
+                    id="eo" name="eo" placeholder="EO / Penyelenggara" required value="{{ old('eo') }}">
+                    @if ($errors->has('eo'))
+                        <span class="invalid-feedback" role="alert">
+                            <p><b>{{ $errors->first('eo') }}</b></p>
+                        </span>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="kegiatan">Nama Kegiatan</label>
-                    <input type="text" class="form-control" id="kegiatan" name="kegiatan" placeholder="Nama Kegiatan">
+                    <input type="text" class="form-control {{$errors->has('kegiatan')?'is-invalid':''}}" 
+                    id="kegiatan" name="kegiatan" placeholder="Nama Kegiatan" required value="{{ old('kegiatan') }}">
+                    @if ($errors->has('kegiatan'))
+                        <span class="invalid-feedback" role="alert">
+                            <p><b>{{ $errors->first('kegiatan') }}</b></p>
+                        </span>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="deskripsi">Deskripsi Kegiatan</label>
-                    <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"></textarea>
+                    <textarea class="form-control {{$errors->has('deskripsi')?'is-invalid':''}}" 
+                        id="deskripsi" name="deskripsi" rows="3" required value="{{ old('deskripsi') }}"></textarea>
+                    @if ($errors->has('deskripsi'))
+                        <span class="invalid-feedback" role="alert">
+                            <p><b>{{ $errors->first('deskripsi') }}</b></p>
+                        </span>
+                    @endif
                 </div>
+
+                
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="tgl_kegiatan">Tanggal Kegitan</label>
-                        <input type="date" class="form-control" id="tgl_kegiatan" name="tgl_kegiatan">
+                        <input type="date" class="form-control {{$errors->has('tgl_kegiatan')?'is-invalid':''}}" 
+                        id="tgl_kegiatan" name="tgl_kegiatan">
+                        @if ($errors->has('tgl_kegiatan'))
+                            <span class="invalid-feedback" role="alert">
+                                <p><b>{{ $errors->first('tgl_kegiatan') }}</b></p>
+                            </span>
+                        @endif
                     </div>
                     <div class="form-group col-md-4">
                         <label for="mulai">Jam Mulai Kegiatan</label>
-                        <input type="time" min="06:00" max="20:00" step="3600" class="form-control" id="mulai"
+                        <input type="time" min="06:00" max="20:00" step="3600" 
+                        class="form-control {{$errors->has('jam_mulai')?'is-invalid':''}}" id="mulai"
                                name="jam_mulai">
+                        @if ($errors->has('jam_mulai'))
+                            <span class="invalid-feedback" role="alert">
+                                <p><b>{{ $errors->first('jam_mulai') }}</b></p>
+                            </span>
+                        @endif
                     </div>
                     <div class="form-group col-md-4">
                         <label for="selesai">Jam Kegiatan Selesai</label>
-                        <input type="time" min="07:00" max="21:00" step="3600" class="form-control" id="selesai"
+                        <input type="time" min="07:00" id="selesai"
+                        max="21:00" step="3600" class="form-control {{$errors->has('jam_selesai')?'is-invalid':''}}"
                                name="jam_selesai">
+                        @if ($errors->has('jam_selesai'))
+                            <span class="invalid-feedback" role="alert">
+                                <p><b>{{ $errors->first('jam_selesai') }}</b></p>
+                            </span>
+                        @endif
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>Upload Surat Pengajuan</label><br>
-                    <input required id="surat" name="surat" type="file" class="file form-control" data-show-preview="true">
+                    <input required  accept="application/pdf" id="surat" name="surat" 
+                    type="file" class="file form-control {{$errors->has('surat')?'is-invalid':''}}" 
+                    data-show-preview="true" value="{{ old('surat') }}">
+                    @if ($errors->has('surat'))
+                        <span class="invalid-feedback" role="alert">
+                            <p><b>{{ $errors->first('surat') }}</b></p>
+                        </span>
+                    @endif
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="no_telp">Nomor Telepon</label>
-                        <input type="text" class="form-control" id="no_telp" name="no_telp"
-                               placeholder="nomor telepon yang bisa dihubungi">
+                        <input type="tel" class="form-control {{$errors->has('no_telp')?'is-invalid':''}}" 
+                        id="no_telp" name="no_telp" value="{{ old('no_telp') }}"
+                        placeholder="nomor telepon yang bisa dihubungi" required>
+                    @if ($errors->has('no_telp'))
+                        <span class="invalid-feedback" role="alert">
+                            <p><b>{{ $errors->first('no_telp') }}</b></p>
+                        </span>
+                    @endif
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="no_telp">Email</label>
-                        <input type="email" class="form-control" id="email" name="email"
-                               placeholder="Email">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control {{$errors->has('email')?'is-invalid':''}}" 
+                        id="email" name="email" placeholder="Email" required value="{{ old('email') }}">
+                    @if ($errors->has('email'))
+                        <span class="invalid-feedback" role="alert">
+                            <p><b>{{ $errors->first('email') }}</b></p>
+                        </span>
+                    @endif
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Pesan Tempat</button>

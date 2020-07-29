@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('admin.dashboard') }}">
           <i class="mdi mdi-clipboard-text-outline menu-icon"></i>
           <span class="menu-title">Dashboard</span>
         </a>

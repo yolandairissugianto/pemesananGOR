@@ -7,10 +7,11 @@
 <link rel="stylesheet" href="{{ asset('css/font-icons.css" type="text/css') }}" />
 <link rel="stylesheet" href="{{ asset('css/animate.css') }}" type="text/css" />
 <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}" type="text/css" />
+<link rel="stylesheet" href="{{ asset('assets/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
 <link rel="stylesheet" href="{{ asset('css/responsive.css') }}" type="text/css" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<link rel="stylesheet" type="text/css" href="{{ asset('include/rs-plugin/css/settings.css') }}" media="screen" />
+
 <link rel="stylesheet" type="text/css" href="{{ asset('include/rs-plugin/css/layers.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('include/rs-plugin/css/navigation.css') }}">

@@ -13,6 +13,7 @@
 <script src="{{ asset('include/rs-plugin/js/extensions/revolution.extension.kenburn.min.js') }}"></script>
 <script src="{{ asset('include/rs-plugin/js/extensions/revolution.extension.navigation.min.js') }}"></script>
 <script src="{{ asset('include/rs-plugin/js/extensions/revolution.extension.migration.min.js') }}"></script>
+
 <script src="{{ asset('include/rs-plugin/js/extensions/revolution.extension.parallax.min.js') }}"></script>
 <script>
     var tpj = jQuery;

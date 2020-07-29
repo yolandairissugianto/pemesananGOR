@@ -36,23 +36,23 @@
                 </div>
                 <div class="form-group">
                   <label for="olahraga_siang">Tarif penggunaan untuk olahraga siang</label>
-                  <input style="background-color: #2b2e4c" disabled value="{{ $facility->olahraga_siang }}" class="form-control" name="olahraga_siang" minlength="2" type="text">
+                  <input style="background-color: #2b2e4c" disabled value="Rp. {{ number_format($facility->olahraga_siang) }}" class="form-control" name="olahraga_siang" minlength="2" type="text">
                 </div>
                 <div class="form-group">
                   <label for="olahraga_malam">Tarif Penggunaan untuk olahraga malam</label>
-                  <input style="background-color: #2b2e4c" disabled value="{{ $facility->olahraga_malam }}" class="form-control" name="olahraga_malam" minlength="2" type="text">
+                  <input style="background-color: #2b2e4c" disabled value="Rp. {{ number_format($facility->olahraga_malam) }}" class="form-control" name="olahraga_malam" minlength="2" type="text">
                 </div>
                 <div class="form-group">
                   <label for="dengan_karcis_sponsor">Tarif Penggunaan selain olahraga (Menarik Karcis dan Sponsor)</label>
-                  <input style="background-color: #2b2e4c" disabled value="{{ $facility->dengan_karcis_sponsor }}" class="form-control" name="dengan_karcis_sponsor" minlength="2" type="text">
+                  <input style="background-color: #2b2e4c" disabled value="Rp. {{ number_format($facility->dengan_karcis_sponsor) }}" class="form-control" name="dengan_karcis_sponsor" minlength="2" type="text">
                 </div>
                 <div class="form-group">
                   <label for="dengan_sponsor">Tarif Penggunaan selain olahraga (Dengan Sponsor)</label>
-                  <input style="background-color: #2b2e4c" disabled value="{{ $facility->dengan_sponsor }}" class="form-control" name="dengan_sponsor" minlength="2" type="text">
+                  <input style="background-color: #2b2e4c" disabled value="Rp. {{ number_format($facility->dengan_sponsor) }}" class="form-control" name="dengan_sponsor" minlength="2" type="text">
                 </div>
                 <div class="form-group">
                   <label for="tanpa_karcis_sponsor">Tarif Penggunaan selain olahraga (Tanpa Karcis dan Sponsor)</label>
-                  <input style="background-color: #2b2e4c" disabled value="{{ $facility->tanpa_karcis_sponsor }}" class="form-control" name="tanpa_karcis_sponsor" minlength="2" type="text">
+                  <input style="background-color: #2b2e4c" disabled value="Rp. {{ number_format($facility->tanpa_karcis_sponsor) }}" class="form-control" name="tanpa_karcis_sponsor" minlength="2" type="text">
                 </div>
               <a href="{{ route('admin.fasilitas') }}" class="btn btn-outline-danger">Cancel</a>  
             </fieldset>

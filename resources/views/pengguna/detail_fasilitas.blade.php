@@ -83,8 +83,8 @@
                                 </td>
                                 <td>1 Jam</td>
                                 <td>
-                                    Siang: {{ $facility -> olahraga_siang }}
-                                    <br>Malam: {{ $facility -> olahraga_malam }}
+                                    Siang: Rp. {{ number_format($facility -> olahraga_siang) }}
+                                    <br>Malam: Rp. {{ number_format($facility -> olahraga_malam) }}
                                 </td>
                                 <td>
                                     <a href="{{ route('pengguna.pemesanan_jam', $facility) }}"
@@ -94,7 +94,7 @@
                             <tr>
                                 <td>Penggunaan selain olahraga (Menarik Karcis dan Sponsor)</td>
                                 <td>1 Hari</td>
-                                <td>{{ $facility -> dengan_karcis_sponsor }}</td>
+                                <td>Rp. {{ number_format($facility -> dengan_karcis_sponsor) }}</td>
                                 <td>
                                     <a href="{{ route('pengguna.pemesanan_hari', ['facility' => $facility, 'tipe' => \App\Pemesanan::$PEMINJAMAN_MENARIK_KARCIS_DAN_SPONSOR]) }}"
                                        class="button button-border button-rounded button-small noleftmargin ">Pesan
@@ -103,7 +103,7 @@
                             <tr>
                                 <td>Penggunaan selain olahraga (Dengan Sponsor)</td>
                                 <td>1 Hari</td>
-                                <td>{{ $facility -> dengan_sponsor }}</td>
+                                <td>Rp. {{ number_format($facility -> dengan_sponsor) }}</td>
                                 <td>
                                     <a href="{{ route('pengguna.pemesanan_hari', ['facility' => $facility, 'tipe' => \App\Pemesanan::$PEMINJAMAN_HANYA_DENGAN_SPONSOR]) }}"
                                        class="button button-border button-rounded button-small noleftmargin ">Pesan
@@ -112,7 +112,7 @@
                             <tr>
                                 <td>Penggunaan selain olahraga (Tanpa Karcis dan Sponsor)</td>
                                 <td>1 Hari</td>
-                                <td>{{ $facility -> tanpa_karcis_sponsor }}</td>
+                                <td>Rp. {{ number_format($facility -> tanpa_karcis_sponsor) }}</td>
                                 <td><a href="{{ route('pengguna.pemesanan_hari', ['facility' => $facility, 'tipe' => \App\Pemesanan::$PEMINJAMAN_TANPA_KARCIS_DAN_SPONSOR]) }}"
                                        class="button button-border button-rounded button-small noleftmargin">Pesan
                                         Tempat</a></td>

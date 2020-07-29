@@ -39,7 +39,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="ijin-penggunaan">Surat Ijin Penggunaan</label>
-                                    <input id="ijin-penggunaan" class="form-control" name="surat_ijin" type="file"
+                                    <input id="ijin-penggunaan" accept="application/pdf" class="form-control" name="surat_ijin" type="file"
                                            required>
                                 </div>
                                 <button class="btn btn-sm btn-outline-twitter" type="submit">

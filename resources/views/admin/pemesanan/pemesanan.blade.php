@@ -27,7 +27,7 @@
                                 <tbody>
                                 @foreach($pemesanans as $key => $pemesanan)
                                     <tr>
-                                        <td>{{ $key+1 }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td><a href="{{ route('admin.pemesanan.detail', $pemesanan) }}">{{ $pemesanan->fasilitas->nama_fasilitas }}</a></td>
                                         <td><a href="{{ route('admin.pemesanan.detail', $pemesanan) }}">{{ $pemesanan->nama }}</a></td>
                                         <td>{{ $pemesanan->event_organizer }}</td>
@@ -64,6 +64,11 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            <br/>
+
+                            {{-- <div class="float-right">
+                                {{ $pemesanans->links() }}
+                            </div> --}}
                         </div>
                     </div>
                 </div>

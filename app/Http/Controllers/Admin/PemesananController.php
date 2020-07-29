@@ -13,8 +13,14 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 
 class PemesananController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth:admin');
+    }
+
     public function index()
     {
+
         $messages = collect(Telegram::getUpdates());
         $pemesanans = Pemesanan::all();
 

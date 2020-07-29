@@ -36,6 +36,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/password/reset/{token}', 'AuthAdmin\ResetPasswordController@showResetForm')->name('admin.password.reset');
 
     Route::get('/', 'AdminController@index')->name('admin.dashboard');
+    Route::get('/chart', 'AdminController@chart')->name('admin.chart');
 
     //Admin Artikel
     Route::get('/artikel', 'Admin\ArtikelController@index')->name('admin.artikel');
