@@ -28,7 +28,7 @@
                         <li><i class="icon-map-marker2"></i>{{ $event -> tgl_acara }}</li>
                     </ul>
                     <div class="entry-content">
-                        <p>{{ $event -> deskripsi }}</p>
+                        <p>{{ substr_replace($event -> deskripsi, "...", 120) }}</p>
                     </div>
                 </div>
             </div>

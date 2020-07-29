@@ -26,7 +26,7 @@
                     <li><i class="icon-calendar3"></i>{{ $article -> created_at }}</li>
                 </ul>
                 <div class="entry-content">
-                    <p>{{ $article -> content }}</p>
+                    <p>{{ substr_replace($article -> content, "...", 120) }}</p>
                     <a href="{{ route('pengguna.detail_artikel', $article->id) }}" class="more-link">Lanjut Membaca</a>
                 </div>
             </div>
