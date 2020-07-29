@@ -44,7 +44,7 @@ class EventController extends Controller
     {
         
         $rules = [
-            'judul'          => 'required|regex:/^[\pL\s\-]+$/u||min:5',
+            'judul'          => 'required|min:5',
             'deskripsi'       => 'required|min:10',
         ];
 

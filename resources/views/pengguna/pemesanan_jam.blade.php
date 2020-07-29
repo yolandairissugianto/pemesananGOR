@@ -198,6 +198,7 @@
                             <p><b>{{ $errors->first('surat') }}</b></p>
                         </span>
                     @endif
+                    
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">

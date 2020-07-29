@@ -32,28 +32,25 @@ function getData(){
 
 (async function showChart() {
     const data = await getData();
-   
+   console.log(data);
 
     const series = data.map(d => {
      const result = month.map((m , i) => {
-        return d.pemesanan.filter(p => p.month === i+1).map(p => p.total).join();   
+        return d.pemesanan.filter(p => p.month == i+1).map(p => p.total).join();   
      })
 
         
         return {
             name : d.nama_fasilitas,
-            data : result.map(r => r === '' ? 0 : +r)
+            data : result.map(r => r == '' ? 0 : +r)
         }
     })
 
+
+    console.log(series);
+
+
     const options = {
-        //   series: [{
-        //   name: 'PRODUCT A',
-        //   data: [44]
-        // }, {
-        //   name: 'PRODUCT B',
-        //   data: [13]
-        // }],
         series : series,
           chart: {
             type: 'bar',

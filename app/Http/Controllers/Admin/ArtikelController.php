@@ -43,7 +43,7 @@ class ArtikelController extends Controller
     {
 
         $rules = [
-            'title'          => 'required|regex:/^[\pL\s\-]+$/u||min:5',
+            'title'          => 'required|min:5',
             'content'       => 'required|min:10',
         ];
 
