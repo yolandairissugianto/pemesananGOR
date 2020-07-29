@@ -16,6 +16,7 @@
             @foreach ($events as $event)
             <div class="entry clearfix">
                 <div class="entry-image">
+                    
                     <img src="{{ asset('uploads/admin/acara/'. $event -> gambar) }}" 
                     style="height: 170px; width: 300px" alt="">
                 </div>
