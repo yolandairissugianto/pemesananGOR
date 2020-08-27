@@ -34,18 +34,9 @@
                             <p class="text-google">Pemesanan telah selesai</p>
                         @elseif($pemesanan->terima_pengajuan)
                             <p class="text-behance">Menunggu Pembayaran</p>
-                            <form action="{{ route('admin.pemesanan.kirim-ijin-penggunaan', $pemesanan->id) }}"
-                                  method="post" enctype="multipart/form-data" class="mt-3">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="ijin-penggunaan">Surat Ijin Penggunaan</label>
-                                    <input id="ijin-penggunaan" accept="application/pdf" class="form-control" name="surat_ijin" type="file"
-                                           required>
-                                </div>
-                                <button class="btn btn-sm btn-outline-twitter" type="submit">
-                                    <i class="mdi mdi-send"></i>&emsp;Kirim Surat Ijin Penggunaan
-                                </button>
-                            </form>
+                            <a class="btn btn-sm btn-outline-twitter" href="{{ route('admin.pemesanan.kirim-ijin-penggunaan', $pemesanan->id) }}">
+                                <i class="mdi mdi-send"></i>&emsp;Kirim Surat Ijin Penggunaan
+                            </a>
                         @elseif($pemesanan->have_sent_code)
                             <p class="text-behance">Sudah kirim kode ke Bot Telegram</p>
                             <a href="{{ route('admin.pemesanan.terima_pengajuan', $pemesanan) }}"

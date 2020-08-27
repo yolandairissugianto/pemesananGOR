@@ -10,12 +10,13 @@ use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use Telegram\Bot\FileUpload\InputFile;
 use Telegram\Bot\Laravel\Facades\Telegram;
+use PDF;
 
 class PemesananController extends Controller
 {
 
     public function __construct(){
-        $this->middleware('auth:admin');
+        $this->middleware('auth:admin')->except('surat');
     }
 
     public function index()
@@ -54,10 +55,10 @@ class PemesananController extends Controller
                 ->with(['error' => 'Gagal mengirim surat ijin penggunaan karena kode peminjaman tidak ditemukan pada BOT']);
         }
 
-        $surat = $request->file('surat_ijin');
-        $path = time() . '.' . $surat->getClientOriginalExtension();
-        $destinationPath = public_path('uploads/surat-ijin-penggunaan/');
-        $surat->move($destinationPath, $path);
+        $destinationPath = public_path('uploads/surat-ijin-penggunaan/surat-ijin-penggunaan.pdf');
+
+        $pdf = PDF::loadView('surat-ijin-penggunaan', compact('pemesanan'))->save($destinationPath);
+
 
         $pemesanan->already_paid = true;
         $pemesanan->update();
@@ -72,7 +73,7 @@ class PemesananController extends Controller
 
         Telegram::sendDocument([
             'chat_id' => $chat_id,
-            'document' => new InputFile(public_path('uploads/surat-ijin-penggunaan/' . $path)),
+            'document' => new InputFile($destinationPath),
             'caption' => 'Surat Ijin Penggunaan'
         ]);
 
@@ -114,28 +115,12 @@ class PemesananController extends Controller
         return redirect()->back()->with(['success' => "Telah menerima pengajuan peminjaman " . $pemesanan->fasilitas->nama_fasilitas . " dari $pemesanan->nama"]);
     }
 
-//    public function terima_pembayaran(Pemesanan $pemesanan)
-//    {
-////        dd(public_path('uploads\dummy\dummy.pdf'));
-//        $pemesanan->already_paid = true;
-//        $pemesanan->update();
-//
-//        $messages = collect(Telegram::getUpdates());
-//        $message = $messages->where('message.text', $pemesanan->code)->first();
-//        $chat_id = $message->message->chat->id;
-//
-//        Telegram::sendMessage([
-//            'chat_id' => $chat_id,
-//            'text' => "Terima Kasih " . strtoupper($pemesanan->nama) . ", "
-//                . "pembayaran anda untuk " . $pemesanan->fasilitas->nama_fasilitas . " pada GOR Trisanja telah diterima."
-//        ]);
-//
-//        Telegram::sendDocument([
-//            'chat_id' => $chat_id,
-//            'document' => new InputFile(public_path('uploads\dummy\dummy.pdf')),
-////            'caption' => 'Surat Ijin Penggunaan'
-//        ]);
-//
-//        return redirect()->back()->with(['success' => "Telah menerima pembayaran peminjaman $pemesanan->fasilitas->nama_fasilitas dari $pemesanan->nama"]);
-//    }
+    public function surat()
+    {
+        $pemesanan = Pemesanan::first();
+//        dd($pemesanan);
+        $pdf = PDF::loadView('surat-ijin-penggunaan', compact('pemesanan'));
+        return $pdf->stream('surat-ijin-penggunaan.pdf');
+//        return view('surat-ijin-penggunaan');
+    }
 }

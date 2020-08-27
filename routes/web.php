@@ -24,6 +24,7 @@ Route::get('telegram/get-me', 'TelegramController@getMe');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/surat', 'Admin\PemesananController@surat')->name('admin.send.surat');
 Route::prefix('admin')->group(function () {
     Route::get('/login', 'AuthAdmin\LoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'AuthAdmin\LoginController@login')->name('admin.login.submit');
@@ -72,7 +73,7 @@ Route::prefix('admin')->group(function () {
         ->name('admin.pemesanan.download.pengajuan');
     Route::get('/detail-pemesanan/{pemesanan}/terima-pengajuan', 'Admin\PemesananController@terima_pengajuan')
         ->name('admin.pemesanan.terima_pengajuan');
-    Route::post('/detail-pemesanan/{pemesanan}/kirim-ijin-penggunaan', 'Admin\PemesananController@kirimSuratIjinPenggunaan')
+    Route::get('/detail-pemesanan/{pemesanan}/kirim-ijin-penggunaan', 'Admin\PemesananController@kirimSuratIjinPenggunaan')
         ->name('admin.pemesanan.kirim-ijin-penggunaan');
     Route::get('/pemesanan/export', 'Admin\PemesananController@export')->name('admin.pemesanan.export');
 
