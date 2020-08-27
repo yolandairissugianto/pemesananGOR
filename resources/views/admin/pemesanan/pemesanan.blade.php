@@ -2,17 +2,25 @@
 
 @section('content')
     <div class="content-wrapper">
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+        @endif
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Data Pemesanan</h4>
                 <div class="row">
                     <div class="col-12">
-                        <a class="btn btn-outline-info float-right" style="margin-bottom: 10px" href="{{ route('admin.pemesanan.export') }}">Cetak Laporan Excel</a>
+                        <a class="btn btn-outline-info float-right" style="margin-bottom: 10px"
+                           href="{{ route('admin.pemesanan.export') }}">Cetak Laporan Excel</a>
                         <div class="table-responsive">
                             <table id="order-listing" class="table">
                                 <thead>
                                 <tr>
                                     <th>No.</th>
+                                    <th>Tampilkan Acara</th>
                                     <th>Fasilitas</th>
                                     <th>PJ</th>
                                     <th>EO</th>
@@ -28,8 +36,19 @@
                                 @foreach($pemesanans as $key => $pemesanan)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td><a href="{{ route('admin.pemesanan.detail', $pemesanan) }}">{{ $pemesanan->fasilitas->nama_fasilitas }}</a></td>
-                                        <td><a href="{{ route('admin.pemesanan.detail', $pemesanan) }}">{{ $pemesanan->nama }}</a></td>
+                                        <td>
+                                            @if($pemesanan->event === 1)
+                                                <a href="{{ route('admin.event.hide', $pemesanan) }}" class="btn btn-sm btn-outline-danger">Sembunyikan</a>
+                                            @else
+                                                <a href="{{ route('admin.event.show', $pemesanan) }}" class="btn btn-sm btn-outline-success">Tampilkan</a>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('admin.pemesanan.detail', $pemesanan) }}">{{ $pemesanan->fasilitas->nama_fasilitas }}</a>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('admin.pemesanan.detail', $pemesanan) }}">{{ $pemesanan->nama }}</a>
+                                        </td>
                                         <td>{{ $pemesanan->event_organizer }}</td>
                                         <td>{{ $pemesanan->kegiatan }}</td>
                                         @if($pemesanan->penggunaan_olahraga_siang != null || $pemesanan->penggunaan_olahraga_malam != null)
@@ -59,7 +78,8 @@
                                         @else
                                             <td class="text-danger">Menunggu peminjam mengirim kode ke BOT</td>
                                         @endif
-                                        <td><a href="{{ route('admin.pemesanan.detail', $pemesanan) }}" class="btn btn-outline-google">detail</a></td>
+                                        <td><a href="{{ route('admin.pemesanan.detail', $pemesanan) }}"
+                                               class="btn btn-outline-google">detail</a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>

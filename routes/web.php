@@ -49,6 +49,13 @@ Route::prefix('admin')->group(function () {
     Route::get('/artikel/{id}/info', 'Admin\ArtikelController@show')->name('admin.artikel.info');
 
     //Admin Acara
+    Route::get('/show-on-event/{pemesanan}', [
+        \App\Http\Controllers\Admin\PemesananController::class, 'showEvent'
+    ])->name('admin.event.show');
+
+    Route::get('/hide-on-event/{pemesanan}', [
+        \App\Http\Controllers\Admin\PemesananController::class, 'hideEvent'
+    ])->name('admin.event.hide');
     Route::get('/acara', 'Admin\EventController@index')->name('admin.acara');
     Route::get('/acara-tambah', 'Admin\EventController@create')->name('admin.acara.tambah');
     Route::post('/acara-tambahdata', 'Admin\EventController@store')->name('admin.acara.tambahdata');

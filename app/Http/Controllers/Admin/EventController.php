@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Pemesanan;
 use Illuminate\Http\Request;
 use App\Event;
 
@@ -20,7 +21,7 @@ class EventController extends Controller
 
     public function index()
     {
-        $events = Event::all();
+        $events = Pemesanan::where('event', 1)->orderBy('start', 'ASC')->get();
         return view('admin.acara.acara', compact('events'));
     }
 
@@ -42,7 +43,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $rules = [
             'judul'          => 'required|min:5',
             'deskripsi'       => 'required|min:10',
@@ -58,7 +59,7 @@ class EventController extends Controller
         ];
 
         $this->validate($request, $rules, $message);
-        
+
         $gambar = $request->file('gambar');
         $path = time() . '.' .$gambar->getClientOriginalExtension();
         $destinationPath = public_path('uploads/admin/acara');
@@ -108,7 +109,7 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $rules = [
             'judul'          => 'required|regex:/^[\pL\s\-]+$/u||min:5',
             'deskripsi'       => 'required|min:10',
@@ -124,7 +125,7 @@ class EventController extends Controller
         ];
 
         $this->validate($request, $rules, $message);
-        
+
         $event = Event::find($id);
         $event->judul = $request->input('judul');
         $event->deskripsi = $request->input('deskripsi');
@@ -134,8 +135,8 @@ class EventController extends Controller
         if ($gambar != null){
             $path = time() . '.' . $gambar->getClientOriginalExtension();
             $destinationPath = public_path('uploads/admin/acara');
-            $gambar->move($destinationPath, $path); 
-            $fevent->gambar = $path;
+            $gambar->move($destinationPath, $path);
+            $event->gambar = $path;
         }
         $event->update();
         return redirect()->route('admin.acara')->with('success', 'Data Berhasil Diubah');

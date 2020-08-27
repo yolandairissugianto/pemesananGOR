@@ -8,7 +8,7 @@
         <h1>Daftar Acara</h1>
         <span>Aritkel berkaitan dengan GOR Trisanja</span>
     </div>
-</section>  
+</section>
 
 <div class="content-wrap">
     <div class="container clearfix">
@@ -16,20 +16,21 @@
             @foreach ($events as $event)
             <div class="entry clearfix">
                 <div class="entry-image">
-                    
-                    <img src="{{ asset('uploads/admin/acara/'. $event -> gambar) }}" 
+
+                    <img src="{{ asset('uploads/admin/fasilitas/'. $event->fasilitas->gambar) }}"
                     style="height: 170px; width: 300px" alt="">
                 </div>
                 <div class="entry-c">
                     <div class="entry-title">
-                        <h2>{{ $event -> judul }}</h2>
+                        <h2>{{ $event->kegiatan }}</h2>
                     </div>
                     <ul class="entry-meta clearfix">
-                        <li><i class="icon-time"></i>{{ $event -> jam_acara }}</li>
-                        <li><i class="icon-map-marker2"></i>{{ $event -> tgl_acara }}</li>
+                        <li><i class="icon-time"></i>{{ \Carbon\Carbon::parse($event->start)->translatedFormat('H:i') . "-" . \Carbon\Carbon::parse($event->finish)->translatedFormat('H:i') }}</li>
+                        <li><i class="icon-map-marker2"></i>{{ \Carbon\Carbon::parse($event->start)->translatedFormat('l, d F Y') }}</li>
                     </ul>
                     <div class="entry-content">
-                        <p>{{ substr_replace($event -> deskripsi, "...", 120) }}</p>
+{{--                        <p>{{ substr_replace($event->deskripsi, "...", 120) }}</p>--}}
+                        <p>{{ $event->deskripsi }}</p>
                     </div>
                 </div>
             </div>

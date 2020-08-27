@@ -123,4 +123,18 @@ class PemesananController extends Controller
         return $pdf->stream('surat-ijin-penggunaan.pdf');
 //        return view('surat-ijin-penggunaan');
     }
+
+    public function showEvent(Pemesanan $pemesanan)
+    {
+        $pemesanan->event = 1;
+        $pemesanan->update();
+        return redirect()->back()->with(['success' => "berhasil menampilkan acara"]);
+    }
+
+    public function hideEvent(Pemesanan $pemesanan)
+    {
+        $pemesanan->event = 0;
+        $pemesanan->update();
+        return redirect()->back()->with(['success' => "berhasil menyembunyikan acara"]);
+    }
 }
